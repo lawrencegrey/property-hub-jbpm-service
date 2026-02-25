@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                   xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                   xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                   xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                   xmlns:drools="http://www.jboss.org/drools"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   id="Definitions_0gk28ne"
+                   targetNamespace="http://www.jboss.org/drools"
+                   expressionLanguage="http://www.mvel.org/2.0"
+                   typeLanguage="http://www.java.com/javaTypes"
+                   xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+
+  <!-- ============ Item Definitions (process variables) ============ -->
+  <bpmn2:itemDefinition id="_bodyItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_device_tokenItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_emailItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_entityItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_first_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_issueItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_last_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_mobile_numberItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_person_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_professional_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_property_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_property_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_reporter_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_reporter_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_subjectItem" structureRef="String" />
+
+  <!-- ============ Process ============ -->
+  <bpmn2:process id="make-report" name="make-report" isExecutable="true"
+                 drools:packageName="com.greysoft.jbpm_engine.processes">
+
+    <!-- Process-level variables -->
+    <bpmn2:property id="body" itemSubjectRef="_bodyItem" name="body" />
+    <bpmn2:property id="device_token" itemSubjectRef="_device_tokenItem" name="device_token" />
+    <bpmn2:property id="email" itemSubjectRef="_emailItem" name="email" />
+    <bpmn2:property id="entity" itemSubjectRef="_entityItem" name="entity" />
+    <bpmn2:property id="first_name" itemSubjectRef="_first_nameItem" name="first_name" />
+    <bpmn2:property id="issue" itemSubjectRef="_issueItem" name="issue" />
+    <bpmn2:property id="last_name" itemSubjectRef="_last_nameItem" name="last_name" />
+    <bpmn2:property id="mobile_number" itemSubjectRef="_mobile_numberItem" name="mobile_number" />
+    <bpmn2:property id="person_id" itemSubjectRef="_person_idItem" name="person_id" />
+    <bpmn2:property id="professional_id" itemSubjectRef="_professional_idItem" name="professional_id" />
+    <bpmn2:property id="property_id" itemSubjectRef="_property_idItem" name="property_id" />
+    <bpmn2:property id="property_name" itemSubjectRef="_property_nameItem" name="property_name" />
+    <bpmn2:property id="reporter_id" itemSubjectRef="_reporter_idItem" name="reporter_id" />
+    <bpmn2:property id="reporter_name" itemSubjectRef="_reporter_nameItem" name="reporter_name" />
+    <bpmn2:property id="subject" itemSubjectRef="_subjectItem" name="subject" />
+
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:outgoing>Flow_06v4llo</bpmn2:outgoing>
+    </bpmn2:startEvent>
+
+    <bpmn2:task id="Activity_1il80t0" name="Notify admin"
+               drools:taskName="notify-admins">
+      <bpmn2:incoming>Flow_1mdbv9p</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_173nn7o</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1il80t0">
+        <bpmn2:dataInput id="_Activity_1il80t0_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_1il80t0_mobile_numberInput" drools:dtype="String" name="mobile_number" />
+        <bpmn2:dataInput id="_Activity_1il80t0_emailInput" drools:dtype="String" name="email" />
+        <bpmn2:dataInput id="_Activity_1il80t0_device_tokenInput" drools:dtype="String" name="device_token" />
+        <bpmn2:dataInput id="_Activity_1il80t0_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_1il80t0_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:dataInput id="_Activity_1il80t0_first_nameInput" drools:dtype="String" name="first_name" />
+        <bpmn2:dataInput id="_Activity_1il80t0_last_nameInput" drools:dtype="String" name="last_name" />
+        <bpmn2:inputSet id="inputSet_Activity_1il80t0">
+          <bpmn2:dataInputRefs>_Activity_1il80t0_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1il80t0_mobile_numberInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1il80t0_emailInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1il80t0_device_tokenInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1il80t0_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1il80t0_subjectInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1il80t0_first_nameInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1il80t0_last_nameInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_1il80t0">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_1il80t0_TaskType">
+        <bpmn2:targetRef>_Activity_1il80t0_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1il80t0_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">notify-admins</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1il80t0_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1il80t0_mobile_number">
+        <bpmn2:sourceRef>mobile_number</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1il80t0_mobile_numberInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1il80t0_email">
+        <bpmn2:sourceRef>email</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1il80t0_emailInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1il80t0_device_token">
+        <bpmn2:sourceRef>device_token</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1il80t0_device_tokenInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1il80t0_body">
+        <bpmn2:targetRef>_Activity_1il80t0_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1il80t0_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{&quot;A client has submitted a report regarding the following: &quot; 
++ entity 
++ &quot;:\n\n&quot;
++ &quot;Name/Item: &quot; + property_name + &quot;\n&quot;
++ &quot;Issue Reported: &quot; + issue + &quot;\n\n&quot;
++ &quot;Reported By: &quot; + reporter_name + &quot; (ID: &quot; + reporter_id + &quot;)\n\n&quot;
++ &quot;Reference IDs:\n&quot;
++ &quot;• Property ID: &quot; + property_id + &quot;\n&quot;
++ &quot;• Person ID: &quot; + person_id + &quot;\n&quot;
++ &quot;• Professional ID: &quot; + professional_id + &quot;\n\n&quot;
++ &quot;Please review this report in the admin portal.&quot;}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1il80t0_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1il80t0_subject">
+        <bpmn2:targetRef>_Activity_1il80t0_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1il80t0_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{&quot;A client has reported a &quot; + entity}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1il80t0_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1il80t0_first_name">
+        <bpmn2:sourceRef>first_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1il80t0_first_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1il80t0_last_name">
+        <bpmn2:sourceRef>last_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1il80t0_last_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+
+    <bpmn2:task id="Activity_1gabqta" name="Make report"
+               drools:taskName="make-report">
+      <bpmn2:incoming>Flow_06v4llo</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1mdbv9p</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1gabqta">
+        <bpmn2:dataInput id="_Activity_1gabqta_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataOutput id="_Activity_1gabqta_property_idOutput" drools:dtype="String" name="property_id" />
+        <bpmn2:dataOutput id="_Activity_1gabqta_person_idOutput" drools:dtype="String" name="person_id" />
+        <bpmn2:dataOutput id="_Activity_1gabqta_property_nameOutput" drools:dtype="String" name="property_name" />
+        <bpmn2:dataOutput id="_Activity_1gabqta_professional_idOutput" drools:dtype="String" name="professional_id" />
+        <bpmn2:dataOutput id="_Activity_1gabqta_issueOutput" drools:dtype="String" name="issue" />
+        <bpmn2:dataOutput id="_Activity_1gabqta_reporter_idOutput" drools:dtype="String" name="reporter_id" />
+        <bpmn2:dataOutput id="_Activity_1gabqta_reporter_nameOutput" drools:dtype="String" name="reporter_name" />
+        <bpmn2:dataOutput id="_Activity_1gabqta_entityOutput" drools:dtype="String" name="entity" />
+        <bpmn2:inputSet id="inputSet_Activity_1gabqta">
+          <bpmn2:dataInputRefs>_Activity_1gabqta_TaskTypeInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_1gabqta">
+          <bpmn2:dataOutputRefs>_Activity_1gabqta_property_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gabqta_person_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gabqta_property_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gabqta_professional_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gabqta_issueOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gabqta_reporter_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gabqta_reporter_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gabqta_entityOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gabqta_TaskType">
+        <bpmn2:targetRef>_Activity_1gabqta_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1gabqta_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">make-report</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1gabqta_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gabqta_property_id">
+        <bpmn2:sourceRef>_Activity_1gabqta_property_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>property_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gabqta_person_id">
+        <bpmn2:sourceRef>_Activity_1gabqta_person_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>person_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gabqta_property_name">
+        <bpmn2:sourceRef>_Activity_1gabqta_property_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>property_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gabqta_professional_id">
+        <bpmn2:sourceRef>_Activity_1gabqta_professional_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>professional_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gabqta_issue">
+        <bpmn2:sourceRef>_Activity_1gabqta_issueOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>issue</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gabqta_reporter_id">
+        <bpmn2:sourceRef>_Activity_1gabqta_reporter_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>reporter_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gabqta_reporter_name">
+        <bpmn2:sourceRef>_Activity_1gabqta_reporter_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>reporter_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gabqta_entity">
+        <bpmn2:sourceRef>_Activity_1gabqta_entityOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>entity</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:task>
+
+    <bpmn2:endEvent id="Event_0xlt9el">
+      <bpmn2:incoming>Flow_173nn7o</bpmn2:incoming>
+    </bpmn2:endEvent>
+
+    <bpmn2:sequenceFlow id="Flow_173nn7o" sourceRef="Activity_1il80t0" targetRef="Event_0xlt9el" />
+    <bpmn2:sequenceFlow id="Flow_06v4llo" sourceRef="StartEvent_1" targetRef="Activity_1gabqta" />
+    <bpmn2:sequenceFlow id="Flow_1mdbv9p" sourceRef="Activity_1gabqta" targetRef="Activity_1il80t0" />
+
+  </bpmn2:process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="make-report">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1il80t0_di" bpmnElement="Activity_1il80t0">
+        <dc:Bounds x="560" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xlt9el_di" bpmnElement="Event_0xlt9el">
+        <dc:Bounds x="712" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gabqta_di" bpmnElement="Activity_1gabqta">
+        <dc:Bounds x="310" y="230" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_173nn7o_di" bpmnElement="Flow_173nn7o">
+        <di:waypoint x="660" y="120" />
+        <di:waypoint x="712" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06v4llo_di" bpmnElement="Flow_06v4llo">
+        <di:waypoint x="218" y="120" />
+        <di:waypoint x="264" y="120" />
+        <di:waypoint x="264" y="270" />
+        <di:waypoint x="310" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mdbv9p_di" bpmnElement="Flow_1mdbv9p">
+        <di:waypoint x="410" y="270" />
+        <di:waypoint x="485" y="270" />
+        <di:waypoint x="485" y="120" />
+        <di:waypoint x="560" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</bpmn2:definitions>

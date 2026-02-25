@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  jbpm-server-full:
+    image: quay.io/kiegroup/jbpm-server-full:7.74.0.Final
+    container_name: jbpm-server-full
+    ports:
+      - "8090:8080"    # remapped to avoid conflict with keycloak on 8080
+      - "8443:8443"
+    restart: unless-stopped
+    depends_on:
+      jbpm-postgres:
+        condition: service_healthy
+    networks:
+      - jbpm-net
+    environment:
+      KIE_ADMIN_USER: admin
+      KIE_ADMIN_PWD: admin
+      KIE_SERVER_USER: kieserver
+      KIE_SERVER_PWD: kieserver
+      JBPM_DB_DRIVER: postgres
+      JBPM_DB_HOST: jbpm-postgres
+      JBPM_DB_PORT: 5432
+      JBPM_DB_NAME: jbpm
+      JBPM_DB_USER: jbpm
+      JBPM_DB_PASSWORD: jbpm
+      JAVA_OPTS: >-
+        -server -Xms1024m -Xmx2048m
+        -XX:MetaspaceSize=512m -XX:MaxMetaspaceSize=1024m
+        --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
+        --add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED
+        --add-exports=jdk.unsupported/sun.reflect=ALL-UNNAMED
+    volumes:
+      - jbpm-niogit:/opt/jboss/wildfly/.niogit
+      - jbpm-deployments:/opt/jboss/wildfly/standalone/deployments
+      - ./kjar-deploy:/opt/jboss/kjar-deploy:ro
+    command: ["/bin/bash", "/opt/jboss/kjar-deploy/jbpm-init.sh"]
+    deploy:
+      resources:
+        limits:
+          memory: 3g
+        reservations:
+          memory: 2g
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8080/kie-server/services/rest/server -u wbadmin:wbadmin || exit 1"]
+      interval: 30s
+      timeout: 15s
+      retries: 20
+      start_period: 300s
+
+  jbpm-postgres:
+    image: postgres:16
+    container_name: jbpm-postgres
+    environment:
+      POSTGRES_DB: jbpm
+      POSTGRES_USER: jbpm
+      POSTGRES_PASSWORD: jbpm
+    ports:
+      - "5434:5432"    # remapped to avoid conflict with other postgres instances
+    volumes:
+      - jbpm-postgres-data:/var/lib/postgresql/data
+    networks:
+      - jbpm-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jbpm -d jbpm"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Auto-deploys the property-platform KJAR to KIE Server on startup.
+  # Runs once, waits for KIE Server to be healthy, installs the KJAR, then exits.
+  jbpm-kjar-deployer:
+    image: alpine:3.19
+    container_name: jbpm-kjar-deployer
+    depends_on:
+      jbpm-server-full:
+        condition: service_healthy
+    volumes:
+      - ./kjar-deploy:/opt/jboss/kjar-deploy:ro
+    networks:
+      - jbpm-net
+    entrypoint: ["/bin/sh", "-c", "apk add --no-cache bash curl git >/dev/null 2>&1 && /bin/bash /opt/jboss/kjar-deploy/auto-deploy.sh"]
+    restart: "no"
+
+volumes:
+  jbpm-postgres-data:
+  jbpm-niogit:
+  jbpm-deployments:
+
+networks:
+  jbpm-net:
+    driver: bridge
+  property-platform:
+    driver: bridge

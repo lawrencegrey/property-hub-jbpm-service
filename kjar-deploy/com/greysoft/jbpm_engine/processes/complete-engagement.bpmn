@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0gk28ne" targetNamespace="http://www.jboss.org/drools" expressionLanguage="http://www.mvel.org/2.0" typeLanguage="http://www.java.com/javaTypes" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <!-- ============ Item Definitions (process variables) ============ -->
+  <bpmn2:itemDefinition id="_bodyItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_buyer_emailItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_buyer_first_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_buyer_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_buyer_last_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_buyer_mobileItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_buyer_tokenItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_currencyItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_decisionItem" structureRef="Boolean" />
+  <bpmn2:itemDefinition id="_device_tokenItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_emailItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_engagement_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_first_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_last_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_lister_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_mobile_numberItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_offer_amountItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_offer_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_offer_statusItem" structureRef="Boolean" />
+  <bpmn2:itemDefinition id="_person_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_person_typeItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_property_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_property_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_property_typeItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_seller_emailItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_seller_first_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_seller_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_seller_last_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_seller_mobileItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_seller_tokenItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_subjectItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_transaction_typeItem" structureRef="String" />
+  <!-- ============ Process ============ -->
+  <bpmn2:process id="complete-engagement" name="complete-engagement" isExecutable="true" drools:packageName="com.greysoft.jbpm_engine.processes">
+    <!-- Process-level variables -->
+    <bpmn2:property id="body" itemSubjectRef="_bodyItem" name="body" />
+    <bpmn2:property id="buyer_email" itemSubjectRef="_buyer_emailItem" name="buyer_email" />
+    <bpmn2:property id="buyer_first_name" itemSubjectRef="_buyer_first_nameItem" name="buyer_first_name" />
+    <bpmn2:property id="buyer_id" itemSubjectRef="_buyer_idItem" name="buyer_id" />
+    <bpmn2:property id="buyer_last_name" itemSubjectRef="_buyer_last_nameItem" name="buyer_last_name" />
+    <bpmn2:property id="buyer_mobile" itemSubjectRef="_buyer_mobileItem" name="buyer_mobile" />
+    <bpmn2:property id="buyer_token" itemSubjectRef="_buyer_tokenItem" name="buyer_token" />
+    <bpmn2:property id="currency" itemSubjectRef="_currencyItem" name="currency" />
+    <bpmn2:property id="decision" itemSubjectRef="_decisionItem" name="decision" />
+    <bpmn2:property id="device_token" itemSubjectRef="_device_tokenItem" name="device_token" />
+    <bpmn2:property id="email" itemSubjectRef="_emailItem" name="email" />
+    <bpmn2:property id="engagement_id" itemSubjectRef="_engagement_idItem" name="engagement_id" />
+    <bpmn2:property id="first_name" itemSubjectRef="_first_nameItem" name="first_name" />
+    <bpmn2:property id="last_name" itemSubjectRef="_last_nameItem" name="last_name" />
+    <bpmn2:property id="lister_id" itemSubjectRef="_lister_idItem" name="lister_id" />
+    <bpmn2:property id="mobile_number" itemSubjectRef="_mobile_numberItem" name="mobile_number" />
+    <bpmn2:property id="offer_amount" itemSubjectRef="_offer_amountItem" name="offer_amount" />
+    <bpmn2:property id="offer_id" itemSubjectRef="_offer_idItem" name="offer_id" />
+    <bpmn2:property id="offer_status" itemSubjectRef="_offer_statusItem" name="offer_status" />
+    <bpmn2:property id="person_id" itemSubjectRef="_person_idItem" name="person_id" />
+    <bpmn2:property id="person_type" itemSubjectRef="_person_typeItem" name="person_type" />
+    <bpmn2:property id="property_id" itemSubjectRef="_property_idItem" name="property_id" />
+    <bpmn2:property id="property_name" itemSubjectRef="_property_nameItem" name="property_name" />
+    <bpmn2:property id="property_type" itemSubjectRef="_property_typeItem" name="property_type" />
+    <bpmn2:property id="seller_email" itemSubjectRef="_seller_emailItem" name="seller_email" />
+    <bpmn2:property id="seller_first_name" itemSubjectRef="_seller_first_nameItem" name="seller_first_name" />
+    <bpmn2:property id="seller_id" itemSubjectRef="_seller_idItem" name="seller_id" />
+    <bpmn2:property id="seller_last_name" itemSubjectRef="_seller_last_nameItem" name="seller_last_name" />
+    <bpmn2:property id="seller_mobile" itemSubjectRef="_seller_mobileItem" name="seller_mobile" />
+    <bpmn2:property id="seller_token" itemSubjectRef="_seller_tokenItem" name="seller_token" />
+    <bpmn2:property id="subject" itemSubjectRef="_subjectItem" name="subject" />
+    <bpmn2:property id="transaction_type" itemSubjectRef="_transaction_typeItem" name="transaction_type" />
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:outgoing>Flow_081ck9f</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:task id="Activity_02m143y" name="Notifies  potential buyer on acceptance of offer" drools:taskName="send-user-message">
+      <bpmn2:incoming>Flow_1r0s4ke</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_026anng</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_02m143y">
+        <bpmn2:dataInput id="_Activity_02m143y_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_02m143y_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_02m143y_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:dataInput id="_Activity_02m143y_emailInput" drools:dtype="String" name="email" />
+        <bpmn2:dataInput id="_Activity_02m143y_device_tokenInput" drools:dtype="String" name="device_token" />
+        <bpmn2:dataInput id="_Activity_02m143y_mobile_numberInput" drools:dtype="String" name="mobile_number" />
+        <bpmn2:dataInput id="_Activity_02m143y_first_nameInput" drools:dtype="String" name="first_name" />
+        <bpmn2:dataInput id="_Activity_02m143y_last_nameInput" drools:dtype="String" name="last_name" />
+        <bpmn2:inputSet id="inputSet_Activity_02m143y">
+          <bpmn2:dataInputRefs>_Activity_02m143y_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_subjectInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_emailInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_device_tokenInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_mobile_numberInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_first_nameInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_last_nameInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_02m143y">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_TaskType">
+        <bpmn2:targetRef>_Activity_02m143y_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_02m143y_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">send-user-message</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_02m143y_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_body">
+        <bpmn2:targetRef>_Activity_02m143y_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_02m143y_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Your offer of "+ currency +" " + offer_amount + " for " + property_name + " was accepted by property lister.  An engagement is now active and can be viewed on PropertyPlatformJMÂ®."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_02m143y_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_subject">
+        <bpmn2:targetRef>_Activity_02m143y_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_02m143y_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{currency +" " + offer_amount + " was accepted for " + property_name}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_02m143y_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_email">
+        <bpmn2:sourceRef>buyer_email</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_02m143y_emailInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_device_token">
+        <bpmn2:sourceRef>buyer_token</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_02m143y_device_tokenInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_mobile_number">
+        <bpmn2:sourceRef>buyer_mobile</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_02m143y_mobile_numberInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_first_name">
+        <bpmn2:sourceRef>buyer_first_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_02m143y_first_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_last_name">
+        <bpmn2:sourceRef>buyer_last_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_02m143y_last_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_0r9txjp" name="Update property details" drools:taskName="offer-property">
+      <bpmn2:incoming>Flow_14jrdqu</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1dl0v6i</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0r9txjp">
+        <bpmn2:dataInput id="_Activity_0r9txjp_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_0r9txjp_property_idInput" drools:dtype="String" name="property_id" />
+        <bpmn2:dataInput id="_Activity_0r9txjp_offer_statusInput" drools:dtype="Boolean" name="offer_status" />
+        <bpmn2:inputSet id="inputSet_Activity_0r9txjp">
+          <bpmn2:dataInputRefs>_Activity_0r9txjp_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0r9txjp_property_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0r9txjp_offer_statusInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_0r9txjp">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_0r9txjp_TaskType">
+        <bpmn2:targetRef>_Activity_0r9txjp_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0r9txjp_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">offer-property</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0r9txjp_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0r9txjp_property_id">
+        <bpmn2:sourceRef>property_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0r9txjp_property_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0r9txjp_offer_status">
+        <bpmn2:targetRef>_Activity_0r9txjp_offer_statusInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0r9txjp_offer_status">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">true</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0r9txjp_offer_statusInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_1qllvqt" name="Add engagement" drools:taskName="add-engagement">
+      <bpmn2:incoming>Flow_0fgjj9q</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0amxioo</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1qllvqt">
+        <bpmn2:dataInput id="_Activity_1qllvqt_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_1qllvqt_property_idInput" drools:dtype="String" name="property_id" />
+        <bpmn2:dataInput id="_Activity_1qllvqt_seller_idInput" drools:dtype="String" name="seller_id" />
+        <bpmn2:dataInput id="_Activity_1qllvqt_buyer_idInput" drools:dtype="String" name="buyer_id" />
+        <bpmn2:dataInput id="_Activity_1qllvqt_offer_idInput" drools:dtype="String" name="offer_id" />
+        <bpmn2:dataInput id="_Activity_1qllvqt_property_typeInput" drools:dtype="String" name="property_type" />
+        <bpmn2:dataInput id="_Activity_1qllvqt_transaction_typeInput" drools:dtype="String" name="transaction_type" />
+        <bpmn2:dataOutput id="_Activity_1qllvqt_engagement_idOutput" drools:dtype="String" name="engagement_id" />
+        <bpmn2:inputSet id="inputSet_Activity_1qllvqt">
+          <bpmn2:dataInputRefs>_Activity_1qllvqt_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1qllvqt_property_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1qllvqt_seller_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1qllvqt_buyer_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1qllvqt_offer_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1qllvqt_property_typeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1qllvqt_transaction_typeInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_1qllvqt">
+          <bpmn2:dataOutputRefs>_Activity_1qllvqt_engagement_idOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_1qllvqt_TaskType">
+        <bpmn2:targetRef>_Activity_1qllvqt_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1qllvqt_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">add-engagement</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1qllvqt_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1qllvqt_property_id">
+        <bpmn2:sourceRef>property_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1qllvqt_property_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1qllvqt_seller_id">
+        <bpmn2:sourceRef>lister_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1qllvqt_seller_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1qllvqt_buyer_id">
+        <bpmn2:sourceRef>person_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1qllvqt_buyer_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1qllvqt_offer_id">
+        <bpmn2:sourceRef>offer_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1qllvqt_offer_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1qllvqt_property_type">
+        <bpmn2:sourceRef>property_type</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1qllvqt_property_typeInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1qllvqt_transaction_type">
+        <bpmn2:sourceRef>transaction_type</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1qllvqt_transaction_typeInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1qllvqt_engagement_id">
+        <bpmn2:sourceRef>_Activity_1qllvqt_engagement_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>engagement_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_0zrx6bx" name="Add buyer (Engagement Party)" drools:taskName="add-engagement-party">
+      <bpmn2:incoming>Flow_0amxioo</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0gz5b2l</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0zrx6bx">
+        <bpmn2:dataInput id="_Activity_0zrx6bx_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_0zrx6bx_property_idInput" drools:dtype="String" name="property_id" />
+        <bpmn2:dataInput id="_Activity_0zrx6bx_person_idInput" drools:dtype="String" name="person_id" />
+        <bpmn2:dataInput id="_Activity_0zrx6bx_engagement_idInput" drools:dtype="String" name="engagement_id" />
+        <bpmn2:dataInput id="_Activity_0zrx6bx_person_typeInput" drools:dtype="String" name="person_type" />
+        <bpmn2:inputSet id="inputSet_Activity_0zrx6bx">
+          <bpmn2:dataInputRefs>_Activity_0zrx6bx_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0zrx6bx_property_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0zrx6bx_person_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0zrx6bx_engagement_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0zrx6bx_person_typeInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_0zrx6bx">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_0zrx6bx_TaskType">
+        <bpmn2:targetRef>_Activity_0zrx6bx_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0zrx6bx_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">add-engagement-party</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0zrx6bx_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0zrx6bx_property_id">
+        <bpmn2:sourceRef>property_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0zrx6bx_property_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0zrx6bx_person_id">
+        <bpmn2:sourceRef>person_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0zrx6bx_person_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0zrx6bx_engagement_id">
+        <bpmn2:sourceRef>engagement_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0zrx6bx_engagement_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0zrx6bx_person_type">
+        <bpmn2:targetRef>_Activity_0zrx6bx_person_typeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0zrx6bx_person_type">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"BUYER"}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0zrx6bx_person_typeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_0r6ew2z" name="Update offer" drools:taskName="update-offer">
+      <bpmn2:incoming>Flow_11mj4ng</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1wlsn9l</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0r6ew2z">
+        <bpmn2:dataInput id="_Activity_0r6ew2z_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_0r6ew2z_offer_idInput" drools:dtype="String" name="offer_id" />
+        <bpmn2:inputSet id="inputSet_Activity_0r6ew2z">
+          <bpmn2:dataInputRefs>_Activity_0r6ew2z_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0r6ew2z_offer_idInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_0r6ew2z">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_0r6ew2z_TaskType">
+        <bpmn2:targetRef>_Activity_0r6ew2z_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0r6ew2z_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">update-offer</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0r6ew2z_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0r6ew2z_offer_id">
+        <bpmn2:sourceRef>offer_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0r6ew2z_offer_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_04xw29o" name="Add seller (Engagement Party)" drools:taskName="add-engagement-party">
+      <bpmn2:incoming>Flow_0gz5b2l</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0b64cz7</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_04xw29o">
+        <bpmn2:dataInput id="_Activity_04xw29o_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_04xw29o_property_idInput" drools:dtype="String" name="property_id" />
+        <bpmn2:dataInput id="_Activity_04xw29o_person_idInput" drools:dtype="String" name="person_id" />
+        <bpmn2:dataInput id="_Activity_04xw29o_engagement_idInput" drools:dtype="String" name="engagement_id" />
+        <bpmn2:dataInput id="_Activity_04xw29o_person_typeInput" drools:dtype="String" name="person_type" />
+        <bpmn2:inputSet id="inputSet_Activity_04xw29o">
+          <bpmn2:dataInputRefs>_Activity_04xw29o_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_04xw29o_property_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_04xw29o_person_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_04xw29o_engagement_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_04xw29o_person_typeInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_04xw29o">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_04xw29o_TaskType">
+        <bpmn2:targetRef>_Activity_04xw29o_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_04xw29o_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">add-engagement-party</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_04xw29o_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_04xw29o_property_id">
+        <bpmn2:sourceRef>property_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_04xw29o_property_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_04xw29o_person_id">
+        <bpmn2:sourceRef>lister_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_04xw29o_person_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_04xw29o_engagement_id">
+        <bpmn2:sourceRef>engagement_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_04xw29o_engagement_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_04xw29o_person_type">
+        <bpmn2:targetRef>_Activity_04xw29o_person_typeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_04xw29o_person_type">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"SELLER"}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_04xw29o_person_typeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_1gmcunn" name="Get participants data" drools:taskName="get-offer-participants">
+      <bpmn2:incoming>Flow_081ck9f</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1lc9aow</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1gmcunn">
+        <bpmn2:dataInput id="_Activity_1gmcunn_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_seller_idInput" drools:dtype="String" name="seller_id" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_buyer_idInput" drools:dtype="String" name="buyer_id" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_currencyInput" drools:dtype="String" name="currency" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_offer_amountInput" drools:dtype="String" name="offer_amount" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_lister_idInput" drools:dtype="String" name="lister_id" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_person_idInput" drools:dtype="String" name="person_id" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_property_idInput" drools:dtype="String" name="property_id" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_property_nameInput" drools:dtype="String" name="property_name" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_transaction_typeInput" drools:dtype="String" name="transaction_type" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_offer_idInput" drools:dtype="String" name="offer_id" />
+        <bpmn2:dataInput id="_Activity_1gmcunn_decisionInput" drools:dtype="Boolean" name="decision" />
+        <bpmn2:dataOutput id="_Activity_1gmcunn_seller_mobileOutput" drools:dtype="String" name="seller_mobile" />
+        <bpmn2:dataOutput id="_Activity_1gmcunn_seller_emailOutput" drools:dtype="String" name="seller_email" />
+        <bpmn2:dataOutput id="_Activity_1gmcunn_seller_tokenOutput" drools:dtype="String" name="seller_token" />
+        <bpmn2:dataOutput id="_Activity_1gmcunn_buyer_first_nameOutput" drools:dtype="String" name="buyer_first_name" />
+        <bpmn2:dataOutput id="_Activity_1gmcunn_buyer_last_nameOutput" drools:dtype="String" name="buyer_last_name" />
+        <bpmn2:dataOutput id="_Activity_1gmcunn_seller_first_nameOutput" drools:dtype="String" name="seller_first_name" />
+        <bpmn2:dataOutput id="_Activity_1gmcunn_seller_last_nameOutput" drools:dtype="String" name="seller_last_name" />
+        <bpmn2:dataOutput id="_Activity_1gmcunn_buyer_mobileOutput" drools:dtype="String" name="buyer_mobile" />
+        <bpmn2:dataOutput id="_Activity_1gmcunn_buyer_emailOutput" drools:dtype="String" name="buyer_email" />
+        <bpmn2:dataOutput id="_Activity_1gmcunn_buyer_tokenOutput" drools:dtype="String" name="buyer_token" />
+        <bpmn2:inputSet id="inputSet_Activity_1gmcunn">
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_seller_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_buyer_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_currencyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_offer_amountInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_lister_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_person_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_property_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_property_nameInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_transaction_typeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_offer_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1gmcunn_decisionInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_1gmcunn">
+          <bpmn2:dataOutputRefs>_Activity_1gmcunn_seller_mobileOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gmcunn_seller_emailOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gmcunn_seller_tokenOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gmcunn_buyer_first_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gmcunn_buyer_last_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gmcunn_seller_first_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gmcunn_seller_last_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gmcunn_buyer_mobileOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gmcunn_buyer_emailOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1gmcunn_buyer_tokenOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_TaskType">
+        <bpmn2:targetRef>_Activity_1gmcunn_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1gmcunn_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">get-offer-participants</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1gmcunn_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_seller_id">
+        <bpmn2:sourceRef>seller_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_seller_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_buyer_id">
+        <bpmn2:sourceRef>person_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_buyer_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_currency">
+        <bpmn2:sourceRef>currency</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_currencyInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_offer_amount">
+        <bpmn2:sourceRef>offer_amount</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_offer_amountInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_lister_id">
+        <bpmn2:sourceRef>lister_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_lister_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_person_id">
+        <bpmn2:sourceRef>person_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_person_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_property_id">
+        <bpmn2:sourceRef>property_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_property_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_property_name">
+        <bpmn2:sourceRef>property_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_property_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_transaction_type">
+        <bpmn2:sourceRef>transaction_type</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_transaction_typeInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_offer_id">
+        <bpmn2:sourceRef>offer_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_offer_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1gmcunn_decision">
+        <bpmn2:sourceRef>decision</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1gmcunn_decisionInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gmcunn_seller_mobile">
+        <bpmn2:sourceRef>_Activity_1gmcunn_seller_mobileOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>seller_mobile</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gmcunn_seller_email">
+        <bpmn2:sourceRef>_Activity_1gmcunn_seller_emailOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>seller_email</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gmcunn_seller_token">
+        <bpmn2:sourceRef>_Activity_1gmcunn_seller_tokenOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>seller_token</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gmcunn_buyer_first_name">
+        <bpmn2:sourceRef>_Activity_1gmcunn_buyer_first_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>buyer_first_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gmcunn_buyer_last_name">
+        <bpmn2:sourceRef>_Activity_1gmcunn_buyer_last_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>buyer_last_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gmcunn_seller_first_name">
+        <bpmn2:sourceRef>_Activity_1gmcunn_seller_first_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>seller_first_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gmcunn_seller_last_name">
+        <bpmn2:sourceRef>_Activity_1gmcunn_seller_last_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>seller_last_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gmcunn_buyer_mobile">
+        <bpmn2:sourceRef>_Activity_1gmcunn_buyer_mobileOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>buyer_mobile</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gmcunn_buyer_email">
+        <bpmn2:sourceRef>_Activity_1gmcunn_buyer_emailOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>buyer_email</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1gmcunn_buyer_token">
+        <bpmn2:sourceRef>_Activity_1gmcunn_buyer_tokenOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>buyer_token</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_1bmlkmz" name="Notifies  potential seller on acceptance of offer" drools:taskName="send-user-message">
+      <bpmn2:incoming>Flow_0q18pf5</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1go9f3r</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1bmlkmz">
+        <bpmn2:dataInput id="_Activity_1bmlkmz_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_1bmlkmz_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_1bmlkmz_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:dataInput id="_Activity_1bmlkmz_emailInput" drools:dtype="String" name="email" />
+        <bpmn2:dataInput id="_Activity_1bmlkmz_device_tokenInput" drools:dtype="String" name="device_token" />
+        <bpmn2:dataInput id="_Activity_1bmlkmz_mobile_numberInput" drools:dtype="String" name="mobile_number" />
+        <bpmn2:dataInput id="_Activity_1bmlkmz_first_nameInput" drools:dtype="String" name="first_name" />
+        <bpmn2:dataInput id="_Activity_1bmlkmz_last_nameInput" drools:dtype="String" name="last_name" />
+        <bpmn2:inputSet id="inputSet_Activity_1bmlkmz">
+          <bpmn2:dataInputRefs>_Activity_1bmlkmz_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1bmlkmz_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1bmlkmz_subjectInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1bmlkmz_emailInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1bmlkmz_device_tokenInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1bmlkmz_mobile_numberInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1bmlkmz_first_nameInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1bmlkmz_last_nameInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_1bmlkmz">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_1bmlkmz_TaskType">
+        <bpmn2:targetRef>_Activity_1bmlkmz_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1bmlkmz_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">send-user-message</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1bmlkmz_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1bmlkmz_body">
+        <bpmn2:targetRef>_Activity_1bmlkmz_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1bmlkmz_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"You accepted an offer of " + currency +" " + offer_amount + " for " + property_name + ".  An engagement is now active and can be viewed on PropertyPlatformJMÂ®."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1bmlkmz_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1bmlkmz_subject">
+        <bpmn2:targetRef>_Activity_1bmlkmz_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1bmlkmz_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{currency +" " + offer_amount + " was accepted for " + property_name}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1bmlkmz_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1bmlkmz_email">
+        <bpmn2:sourceRef>seller_email</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1bmlkmz_emailInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1bmlkmz_device_token">
+        <bpmn2:sourceRef>seller_token</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1bmlkmz_device_tokenInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1bmlkmz_mobile_number">
+        <bpmn2:sourceRef>seller_mobile</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1bmlkmz_mobile_numberInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1bmlkmz_first_name">
+        <bpmn2:sourceRef>buyer_first_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1bmlkmz_first_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1bmlkmz_last_name">
+        <bpmn2:sourceRef>buyer_last_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1bmlkmz_last_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_0uaqrbm" name="Notifies  potential buyer on rejection of offer" drools:taskName="send-user-message">
+      <bpmn2:incoming>Flow_0nj6jct</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0wcj5cm</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0uaqrbm">
+        <bpmn2:dataInput id="_Activity_0uaqrbm_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_0uaqrbm_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_0uaqrbm_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:dataInput id="_Activity_0uaqrbm_emailInput" drools:dtype="String" name="email" />
+        <bpmn2:dataInput id="_Activity_0uaqrbm_device_tokenInput" drools:dtype="String" name="device_token" />
+        <bpmn2:dataInput id="_Activity_0uaqrbm_mobile_numberInput" drools:dtype="String" name="mobile_number" />
+        <bpmn2:dataInput id="_Activity_0uaqrbm_first_nameInput" drools:dtype="String" name="first_name" />
+        <bpmn2:dataInput id="_Activity_0uaqrbm_last_nameInput" drools:dtype="String" name="last_name" />
+        <bpmn2:inputSet id="inputSet_Activity_0uaqrbm">
+          <bpmn2:dataInputRefs>_Activity_0uaqrbm_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0uaqrbm_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0uaqrbm_subjectInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0uaqrbm_emailInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0uaqrbm_device_tokenInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0uaqrbm_mobile_numberInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0uaqrbm_first_nameInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0uaqrbm_last_nameInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_0uaqrbm">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_0uaqrbm_TaskType">
+        <bpmn2:targetRef>_Activity_0uaqrbm_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0uaqrbm_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">send-user-message</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0uaqrbm_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0uaqrbm_body">
+        <bpmn2:targetRef>_Activity_0uaqrbm_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0uaqrbm_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Your offer of "+ currency +" " + offer_amount + " for " + property_name + " was REJECTED by property lister."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0uaqrbm_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0uaqrbm_subject">
+        <bpmn2:targetRef>_Activity_0uaqrbm_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0uaqrbm_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{currency +" " + offer_amount + " was REJECTED for " + property_name}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0uaqrbm_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0uaqrbm_email">
+        <bpmn2:sourceRef>buyer_email</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0uaqrbm_emailInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0uaqrbm_device_token">
+        <bpmn2:sourceRef>buyer_token</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0uaqrbm_device_tokenInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0uaqrbm_mobile_number">
+        <bpmn2:sourceRef>buyer_mobile</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0uaqrbm_mobile_numberInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0uaqrbm_first_name">
+        <bpmn2:sourceRef>buyer_first_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0uaqrbm_first_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0uaqrbm_last_name">
+        <bpmn2:sourceRef>buyer_last_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0uaqrbm_last_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:exclusiveGateway id="Gateway_17glb2z" gatewayDirection="Diverging">
+      <bpmn2:incoming>Flow_1lc9aow</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0w5fhdo</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_0nj6jct</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:parallelGateway id="Gateway_0q05aqm" gatewayDirection="Diverging">
+      <bpmn2:incoming>Flow_0b64cz7</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1r0s4ke</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_0q18pf5</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:parallelGateway id="Gateway_15r2h4l" gatewayDirection="Converging">
+      <bpmn2:incoming>Flow_1go9f3r</bpmn2:incoming>
+      <bpmn2:incoming>Flow_026anng</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0j28vxw</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:parallelGateway id="Gateway_1wfpe2g" gatewayDirection="Diverging">
+      <bpmn2:incoming>Flow_0w5fhdo</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_14jrdqu</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_11mj4ng</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:parallelGateway id="Gateway_0a16bly" gatewayDirection="Converging">
+      <bpmn2:incoming>Flow_1wlsn9l</bpmn2:incoming>
+      <bpmn2:incoming>Flow_1dl0v6i</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0fgjj9q</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:endEvent id="Event_0xlt9el">
+      <bpmn2:incoming>Flow_0j28vxw</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:endEvent id="Event_0reject_end">
+      <bpmn2:incoming>Flow_0wcj5cm</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_0amxioo" sourceRef="Activity_1qllvqt" targetRef="Activity_0zrx6bx" />
+    <bpmn2:sequenceFlow id="Flow_0gz5b2l" sourceRef="Activity_0zrx6bx" targetRef="Activity_04xw29o" />
+    <bpmn2:sequenceFlow id="Flow_0b64cz7" sourceRef="Activity_04xw29o" targetRef="Gateway_0q05aqm" />
+    <bpmn2:sequenceFlow id="Flow_1r0s4ke" sourceRef="Gateway_0q05aqm" targetRef="Activity_02m143y" />
+    <bpmn2:sequenceFlow id="Flow_0q18pf5" sourceRef="Gateway_0q05aqm" targetRef="Activity_1bmlkmz" />
+    <bpmn2:sequenceFlow id="Flow_1go9f3r" sourceRef="Activity_1bmlkmz" targetRef="Gateway_15r2h4l" />
+    <bpmn2:sequenceFlow id="Flow_026anng" sourceRef="Activity_02m143y" targetRef="Gateway_15r2h4l" />
+    <bpmn2:sequenceFlow id="Flow_0j28vxw" sourceRef="Gateway_15r2h4l" targetRef="Event_0xlt9el" />
+    <bpmn2:sequenceFlow id="Flow_081ck9f" sourceRef="StartEvent_1" targetRef="Activity_1gmcunn" />
+    <bpmn2:sequenceFlow id="Flow_1lc9aow" sourceRef="Activity_1gmcunn" targetRef="Gateway_17glb2z" />
+    <bpmn2:sequenceFlow id="Flow_14jrdqu" sourceRef="Gateway_1wfpe2g" targetRef="Activity_0r9txjp" />
+    <bpmn2:sequenceFlow id="Flow_11mj4ng" sourceRef="Gateway_1wfpe2g" targetRef="Activity_0r6ew2z" />
+    <bpmn2:sequenceFlow id="Flow_1wlsn9l" sourceRef="Activity_0r6ew2z" targetRef="Gateway_0a16bly" />
+    <bpmn2:sequenceFlow id="Flow_1dl0v6i" sourceRef="Activity_0r9txjp" targetRef="Gateway_0a16bly" />
+    <bpmn2:sequenceFlow id="Flow_0fgjj9q" sourceRef="Gateway_0a16bly" targetRef="Activity_1qllvqt" />
+    <bpmn2:sequenceFlow id="Flow_0w5fhdo" sourceRef="Gateway_17glb2z" targetRef="Gateway_1wfpe2g">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">return decision == true;</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="Flow_0nj6jct" sourceRef="Gateway_17glb2z" targetRef="Activity_0uaqrbm">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">return decision == false;</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="Flow_0wcj5cm" sourceRef="Activity_0uaqrbm" targetRef="Event_0reject_end" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="complete-engagement">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="162" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_02m143y_di" bpmnElement="Activity_02m143y">
+        <dc:Bounds x="1020" y="130" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0r9txjp_di" bpmnElement="Activity_0r9txjp">
+        <dc:Bounds x="440" y="90" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qllvqt_di" bpmnElement="Activity_1qllvqt">
+        <dc:Bounds x="640" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1o7at28" bpmnElement="Activity_0zrx6bx">
+        <dc:Bounds x="640" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0r6ew2z_di" bpmnElement="Activity_0r6ew2z">
+        <dc:Bounds x="440" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ghmis7" bpmnElement="Activity_04xw29o">
+        <dc:Bounds x="770" y="190" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gmcunn_di" bpmnElement="Activity_1gmcunn">
+        <dc:Bounds x="230" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0q05aqm_di" bpmnElement="Gateway_0q05aqm">
+        <dc:Bounds x="915" y="215" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0elnn5h" bpmnElement="Activity_1bmlkmz">
+        <dc:Bounds x="1020" y="280" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_15r2h4l_di" bpmnElement="Gateway_15r2h4l">
+        <dc:Bounds x="1165" y="215" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1wfpe2g_di" bpmnElement="Gateway_1wfpe2g">
+        <dc:Bounds x="365" y="175" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0a16bly_di" bpmnElement="Gateway_0a16bly">
+        <dc:Bounds x="555" y="185" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_17glb2z_di" bpmnElement="Gateway_17glb2z" isMarkerVisible="true">
+        <dc:Bounds x="315" y="265" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1fhnj8b" bpmnElement="Activity_0uaqrbm">
+        <dc:Bounds x="1240" y="340" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xlt9el_di" bpmnElement="Event_0xlt9el">
+        <dc:Bounds x="1272" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0reject_end_di" bpmnElement="Event_0reject_end">
+        <dc:Bounds x="1362" y="362" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0amxioo_di" bpmnElement="Flow_0amxioo">
+        <di:waypoint x="690" y="260" />
+        <di:waypoint x="690" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gz5b2l_di" bpmnElement="Flow_0gz5b2l">
+        <di:waypoint x="740" y="120" />
+        <di:waypoint x="755" y="120" />
+        <di:waypoint x="755" y="230" />
+        <di:waypoint x="770" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0b64cz7_di" bpmnElement="Flow_0b64cz7">
+        <di:waypoint x="870" y="230" />
+        <di:waypoint x="893" y="230" />
+        <di:waypoint x="893" y="240" />
+        <di:waypoint x="915" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1r0s4ke_di" bpmnElement="Flow_1r0s4ke">
+        <di:waypoint x="940" y="215" />
+        <di:waypoint x="940" y="170" />
+        <di:waypoint x="1020" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0q18pf5_di" bpmnElement="Flow_0q18pf5">
+        <di:waypoint x="940" y="265" />
+        <di:waypoint x="940" y="320" />
+        <di:waypoint x="1020" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1go9f3r_di" bpmnElement="Flow_1go9f3r">
+        <di:waypoint x="1120" y="320" />
+        <di:waypoint x="1190" y="320" />
+        <di:waypoint x="1190" y="265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_026anng_di" bpmnElement="Flow_026anng">
+        <di:waypoint x="1120" y="170" />
+        <di:waypoint x="1190" y="170" />
+        <di:waypoint x="1190" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j28vxw_di" bpmnElement="Flow_0j28vxw">
+        <di:waypoint x="1215" y="240" />
+        <di:waypoint x="1272" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_081ck9f_di" bpmnElement="Flow_081ck9f">
+        <di:waypoint x="198" y="200" />
+        <di:waypoint x="230" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lc9aow_di" bpmnElement="Flow_1lc9aow">
+        <di:waypoint x="280" y="240" />
+        <di:waypoint x="280" y="290" />
+        <di:waypoint x="315" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14jrdqu_di" bpmnElement="Flow_14jrdqu">
+        <di:waypoint x="390" y="175" />
+        <di:waypoint x="390" y="130" />
+        <di:waypoint x="440" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11mj4ng_di" bpmnElement="Flow_11mj4ng">
+        <di:waypoint x="390" y="225" />
+        <di:waypoint x="390" y="290" />
+        <di:waypoint x="440" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wlsn9l_di" bpmnElement="Flow_1wlsn9l">
+        <di:waypoint x="540" y="290" />
+        <di:waypoint x="580" y="290" />
+        <di:waypoint x="580" y="235" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dl0v6i_di" bpmnElement="Flow_1dl0v6i">
+        <di:waypoint x="540" y="130" />
+        <di:waypoint x="580" y="130" />
+        <di:waypoint x="580" y="185" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fgjj9q_di" bpmnElement="Flow_0fgjj9q">
+        <di:waypoint x="580" y="235" />
+        <di:waypoint x="580" y="300" />
+        <di:waypoint x="640" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0w5fhdo_di" bpmnElement="Flow_0w5fhdo">
+        <di:waypoint x="340" y="265" />
+        <di:waypoint x="340" y="200" />
+        <di:waypoint x="365" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nj6jct_di" bpmnElement="Flow_0nj6jct">
+        <di:waypoint x="340" y="315" />
+        <di:waypoint x="340" y="380" />
+        <di:waypoint x="1240" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wcj5cm_di" bpmnElement="Flow_0wcj5cm">
+        <di:waypoint x="1340" y="380" />
+        <di:waypoint x="1362" y="380" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

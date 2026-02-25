@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_022x76c" targetNamespace="http://www.jboss.org/drools" expressionLanguage="http://www.mvel.org/2.0" typeLanguage="http://www.java.com/javaTypes" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <!-- ============ Item Definitions (process variables) ============ -->
+  <bpmn2:itemDefinition id="_bodyItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_device_tokenItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_emailItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_first_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_last_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_messageItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_mobile_numberItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_subjectItem" structureRef="String" />
+  <!-- ============ Process ============ -->
+  <bpmn2:process id="signup-process" name="signup-process" isExecutable="true" drools:packageName="com.greysoft.jbpm_engine.processes">
+    <!-- Process-level variables -->
+    <bpmn2:property id="body" itemSubjectRef="_bodyItem" name="body" />
+    <bpmn2:property id="device_token" itemSubjectRef="_device_tokenItem" name="device_token" />
+    <bpmn2:property id="email" itemSubjectRef="_emailItem" name="email" />
+    <bpmn2:property id="first_name" itemSubjectRef="_first_nameItem" name="first_name" />
+    <bpmn2:property id="last_name" itemSubjectRef="_last_nameItem" name="last_name" />
+    <bpmn2:property id="message" itemSubjectRef="_messageItem" name="message" />
+    <bpmn2:property id="mobile_number" itemSubjectRef="_mobile_numberItem" name="mobile_number" />
+    <bpmn2:property id="subject" itemSubjectRef="_subjectItem" name="subject" />
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:outgoing>Flow_10f0wm9</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:userTask id="Activity_0yzwe9j" name="Submit user details for Sign Up">
+      <bpmn2:incoming>Flow_10f0wm9</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_039usp5</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0yzwe9j">
+        <bpmn2:dataOutput id="_Activity_0yzwe9j_emailOutput" name="email" />
+        <bpmn2:dataOutput id="_Activity_0yzwe9j_first_nameOutput" name="first_name" />
+        <bpmn2:dataOutput id="_Activity_0yzwe9j_last_nameOutput" name="last_name" />
+        <bpmn2:dataOutput id="_Activity_0yzwe9j_device_tokenOutput" name="device_token" />
+        <bpmn2:dataOutput id="_Activity_0yzwe9j_mobile_numberOutput" name="mobile_number" />
+        <bpmn2:inputSet id="inputSet_Activity_0yzwe9j" />
+        <bpmn2:outputSet id="outputSet_Activity_0yzwe9j">
+          <bpmn2:dataOutputRefs>_Activity_0yzwe9j_emailOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_0yzwe9j_first_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_0yzwe9j_last_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_0yzwe9j_device_tokenOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_0yzwe9j_mobile_numberOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0yzwe9j_email">
+        <bpmn2:sourceRef>_Activity_0yzwe9j_emailOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>email</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0yzwe9j_first_name">
+        <bpmn2:sourceRef>_Activity_0yzwe9j_first_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>first_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0yzwe9j_last_name">
+        <bpmn2:sourceRef>_Activity_0yzwe9j_last_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>last_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0yzwe9j_device_token">
+        <bpmn2:sourceRef>_Activity_0yzwe9j_device_tokenOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>device_token</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0yzwe9j_mobile_number">
+        <bpmn2:sourceRef>_Activity_0yzwe9j_mobile_numberOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>mobile_number</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:userTask>
+    <bpmn2:task id="Activity_15839ek" name="Notify admins" drools:taskName="notify-admins">
+      <bpmn2:incoming>Flow_1wtn7yy</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1q8z95v</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_15839ek">
+        <bpmn2:dataInput id="_Activity_15839ek_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_15839ek_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_15839ek_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:inputSet id="inputSet_Activity_15839ek">
+          <bpmn2:dataInputRefs>_Activity_15839ek_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_15839ek_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_15839ek_subjectInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_15839ek">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_15839ek_TaskType">
+        <bpmn2:targetRef>_Activity_15839ek_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_15839ek_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">notify-admins</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_15839ek_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_15839ek_body">
+        <bpmn2:targetRef>_Activity_15839ek_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_15839ek_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Just notifying you that a new user:" + first_name +" " + last_name +" has signed up to use the Property Platform"}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_15839ek_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_15839ek_subject">
+        <bpmn2:targetRef>_Activity_15839ek_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_15839ek_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">New User Sign-up (Property Platform)</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_15839ek_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_1ti0w73" name="Send welcome message to user" drools:taskName="send-user-message">
+      <bpmn2:incoming>Flow_1hc7vnt</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_12o08yi</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1ti0w73">
+        <bpmn2:dataInput id="_Activity_1ti0w73_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_1ti0w73_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:dataInput id="_Activity_1ti0w73_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_1ti0w73_messageInput" drools:dtype="String" name="message" />
+        <bpmn2:inputSet id="inputSet_Activity_1ti0w73">
+          <bpmn2:dataInputRefs>_Activity_1ti0w73_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1ti0w73_subjectInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1ti0w73_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1ti0w73_messageInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_1ti0w73">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_1ti0w73_TaskType">
+        <bpmn2:targetRef>_Activity_1ti0w73_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1ti0w73_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">send-user-message</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1ti0w73_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1ti0w73_subject">
+        <bpmn2:targetRef>_Activity_1ti0w73_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1ti0w73_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">Welcome to our Property Platform</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1ti0w73_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1ti0w73_body">
+        <bpmn2:targetRef>_Activity_1ti0w73_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1ti0w73_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">Welcome to our Property Platform where you will be able to list, buy or sell your properties.  Your next step would be to verify your identity, as our first priority is to protect buyers, sellers and other parties who use this platform.</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1ti0w73_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1ti0w73_message">
+        <bpmn2:targetRef>_Activity_1ti0w73_messageInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1ti0w73_message">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">Next steps: Identify Verification</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1ti0w73_messageInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:parallelGateway id="Gateway_1emtcos" gatewayDirection="Diverging">
+      <bpmn2:incoming>Flow_039usp5</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1hc7vnt</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_1wtn7yy</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:parallelGateway id="Gateway_1eps1qc" gatewayDirection="Converging">
+      <bpmn2:incoming>Flow_12o08yi</bpmn2:incoming>
+      <bpmn2:incoming>Flow_1q8z95v</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1cnypan</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:endEvent id="Event_0a9npdt">
+      <bpmn2:incoming>Flow_1cnypan</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_039usp5" sourceRef="Activity_0yzwe9j" targetRef="Gateway_1emtcos" />
+    <bpmn2:sequenceFlow id="Flow_10f0wm9" sourceRef="StartEvent_1" targetRef="Activity_0yzwe9j" />
+    <bpmn2:sequenceFlow id="Flow_12o08yi" sourceRef="Activity_1ti0w73" targetRef="Gateway_1eps1qc" />
+    <bpmn2:sequenceFlow id="Flow_1cnypan" sourceRef="Gateway_1eps1qc" targetRef="Event_0a9npdt" />
+    <bpmn2:sequenceFlow id="Flow_1hc7vnt" sourceRef="Gateway_1emtcos" targetRef="Activity_1ti0w73" />
+    <bpmn2:sequenceFlow id="Flow_1q8z95v" sourceRef="Activity_15839ek" targetRef="Gateway_1eps1qc" />
+    <bpmn2:sequenceFlow id="Flow_1wtn7yy" sourceRef="Gateway_1emtcos" targetRef="Activity_15839ek" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="signup-process">
+      <bpmndi:BPMNShape id="Event_0a9npdt_di" bpmnElement="Event_0a9npdt">
+        <dc:Bounds x="902" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1emtcos_di" bpmnElement="Gateway_1emtcos">
+        <dc:Bounds x="415" y="235" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1eps1qc_di" bpmnElement="Gateway_1eps1qc">
+        <dc:Bounds x="715" y="225" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0yzwe9j_di" bpmnElement="Activity_0yzwe9j">
+        <dc:Bounds x="250" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_08qqpc6" bpmnElement="Activity_15839ek">
+        <dc:Bounds x="540" y="320" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_09morgk" bpmnElement="Activity_1ti0w73">
+        <dc:Bounds x="530" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="242" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_039usp5_di" bpmnElement="Flow_039usp5">
+        <di:waypoint x="350" y="260" />
+        <di:waypoint x="415" y="260" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="379" y="242" width="9" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10f0wm9_di" bpmnElement="Flow_10f0wm9">
+        <di:waypoint x="188" y="260" />
+        <di:waypoint x="250" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12o08yi_di" bpmnElement="Flow_12o08yi">
+        <di:waypoint x="630" y="150" />
+        <di:waypoint x="740" y="150" />
+        <di:waypoint x="740" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cnypan_di" bpmnElement="Flow_1cnypan">
+        <di:waypoint x="765" y="250" />
+        <di:waypoint x="902" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hc7vnt_di" bpmnElement="Flow_1hc7vnt">
+        <di:waypoint x="440" y="235" />
+        <di:waypoint x="440" y="150" />
+        <di:waypoint x="530" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q8z95v_di" bpmnElement="Flow_1q8z95v">
+        <di:waypoint x="640" y="360" />
+        <di:waypoint x="740" y="360" />
+        <di:waypoint x="740" y="275" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wtn7yy_di" bpmnElement="Flow_1wtn7yy">
+        <di:waypoint x="440" y="285" />
+        <di:waypoint x="440" y="360" />
+        <di:waypoint x="540" y="360" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

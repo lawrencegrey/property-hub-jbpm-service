@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1w9nenc" targetNamespace="http://www.jboss.org/drools" expressionLanguage="http://www.mvel.org/2.0" typeLanguage="http://www.java.com/javaTypes" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <!-- ============ Item Definitions (process variables) ============ -->
+  <bpmn2:itemDefinition id="_address_document_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_address_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_approval_commentItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_approvedItem" structureRef="Boolean" />
+  <bpmn2:itemDefinition id="_bodyItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_device_tokenItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_document_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_emailItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_first_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_last_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_mobile_numberItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_person_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_person_role_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_profession_typeItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_subjectItem" structureRef="String" />
+  <!-- ============ Process ============ -->
+  <bpmn2:process id="add-profession" name="add-profession" isExecutable="true" drools:packageName="com.greysoft.jbpm_engine.processes">
+    <!-- Process-level variables -->
+    <bpmn2:property id="address_document_id" itemSubjectRef="_address_document_idItem" name="address_document_id" />
+    <bpmn2:property id="address_id" itemSubjectRef="_address_idItem" name="address_id" />
+    <bpmn2:property id="approval_comment" itemSubjectRef="_approval_commentItem" name="approval_comment" />
+    <bpmn2:property id="approved" itemSubjectRef="_approvedItem" name="approved" />
+    <bpmn2:property id="body" itemSubjectRef="_bodyItem" name="body" />
+    <bpmn2:property id="device_token" itemSubjectRef="_device_tokenItem" name="device_token" />
+    <bpmn2:property id="document_id" itemSubjectRef="_document_idItem" name="document_id" />
+    <bpmn2:property id="email" itemSubjectRef="_emailItem" name="email" />
+    <bpmn2:property id="first_name" itemSubjectRef="_first_nameItem" name="first_name" />
+    <bpmn2:property id="last_name" itemSubjectRef="_last_nameItem" name="last_name" />
+    <bpmn2:property id="mobile_number" itemSubjectRef="_mobile_numberItem" name="mobile_number" />
+    <bpmn2:property id="person_id" itemSubjectRef="_person_idItem" name="person_id" />
+    <bpmn2:property id="person_role_id" itemSubjectRef="_person_role_idItem" name="person_role_id" />
+    <bpmn2:property id="profession_type" itemSubjectRef="_profession_typeItem" name="profession_type" />
+    <bpmn2:property id="subject" itemSubjectRef="_subjectItem" name="subject" />
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:outgoing>Flow_02mygdk</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:userTask id="add-professional" name="Add professional details">
+      <bpmn2:incoming>Flow_02mygdk</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0php9gq</bpmn2:outgoing>
+      <bpmn2:potentialOwner id="po_add-professional">
+        <bpmn2:resourceAssignmentExpression id="rae_add-professional">
+          <bpmn2:formalExpression>wbadmin</bpmn2:formalExpression>
+        </bpmn2:resourceAssignmentExpression>
+      </bpmn2:potentialOwner>
+      <bpmn2:ioSpecification id="ioSpec_add-professional">
+        <bpmn2:dataOutput id="_add-professional_person_idOutput" name="person_id" />
+        <bpmn2:dataOutput id="_add-professional_profession_typeOutput" name="profession_type" />
+        <bpmn2:dataOutput id="_add-professional_first_nameOutput" name="first_name" />
+        <bpmn2:dataOutput id="_add-professional_person_role_idOutput" name="person_role_id" />
+        <bpmn2:dataOutput id="_add-professional_emailOutput" name="email" />
+        <bpmn2:dataOutput id="_add-professional_mobile_numberOutput" name="mobile_number" />
+        <bpmn2:dataOutput id="_add-professional_device_tokenOutput" name="device_token" />
+        <bpmn2:dataOutput id="_add-professional_last_nameOutput" name="last_name" />
+        <bpmn2:inputSet id="inputSet_add-professional" />
+        <bpmn2:outputSet id="outputSet_add-professional">
+          <bpmn2:dataOutputRefs>_add-professional_person_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_add-professional_profession_typeOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_add-professional_first_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_add-professional_person_role_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_add-professional_emailOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_add-professional_mobile_numberOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_add-professional_device_tokenOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_add-professional_last_nameOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataOutputAssociation id="doa_add-professional_person_id">
+        <bpmn2:sourceRef>_add-professional_person_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>person_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_add-professional_profession_type">
+        <bpmn2:sourceRef>_add-professional_profession_typeOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>profession_type</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_add-professional_first_name">
+        <bpmn2:sourceRef>_add-professional_first_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>first_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_add-professional_person_role_id">
+        <bpmn2:sourceRef>_add-professional_person_role_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>person_role_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_add-professional_email">
+        <bpmn2:sourceRef>_add-professional_emailOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>email</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_add-professional_mobile_number">
+        <bpmn2:sourceRef>_add-professional_mobile_numberOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>mobile_number</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_add-professional_device_token">
+        <bpmn2:sourceRef>_add-professional_device_tokenOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>device_token</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_add-professional_last_name">
+        <bpmn2:sourceRef>_add-professional_last_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>last_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:userTask>
+    <bpmn2:userTask id="Activity_0d89c17" name="Admin Approval">
+      <bpmn2:incoming>Flow_0z6bx85</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1dwrxp5</bpmn2:outgoing>
+      <bpmn2:potentialOwner id="po_Activity_0d89c17">
+        <bpmn2:resourceAssignmentExpression id="rae_Activity_0d89c17">
+          <bpmn2:formalExpression>wbadmin</bpmn2:formalExpression>
+        </bpmn2:resourceAssignmentExpression>
+      </bpmn2:potentialOwner>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0d89c17">
+        <bpmn2:dataOutput id="_Activity_0d89c17_approvedOutput" name="approved" />
+        <bpmn2:dataOutput id="_Activity_0d89c17_approval_commentOutput" name="approval_comment" />
+        <bpmn2:inputSet id="inputSet_Activity_0d89c17" />
+        <bpmn2:outputSet id="outputSet_Activity_0d89c17">
+          <bpmn2:dataOutputRefs>_Activity_0d89c17_approvedOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_0d89c17_approval_commentOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0d89c17_approved">
+        <bpmn2:sourceRef>_Activity_0d89c17_approvedOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>approved</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0d89c17_approval_comment">
+        <bpmn2:sourceRef>_Activity_0d89c17_approval_commentOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>approval_comment</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:userTask>
+    <bpmn2:task id="Activity_0q4r85k" name="Delete address" drools:taskName="delete-address">
+      <bpmn2:incoming>Flow_09l1bj0</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1iqsy8l</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0q4r85k">
+        <bpmn2:dataInput id="_Activity_0q4r85k_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataOutput id="_Activity_0q4r85k_address_idOutput" drools:dtype="String" name="address_id" />
+        <bpmn2:inputSet id="inputSet_Activity_0q4r85k">
+          <bpmn2:dataInputRefs>_Activity_0q4r85k_TaskTypeInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_0q4r85k">
+          <bpmn2:dataOutputRefs>_Activity_0q4r85k_address_idOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_0q4r85k_TaskType">
+        <bpmn2:targetRef>_Activity_0q4r85k_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0q4r85k_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">delete-address</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0q4r85k_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0q4r85k_address_id">
+        <bpmn2:sourceRef>_Activity_0q4r85k_address_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>address_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_1t9novn" name="Delete professional details" drools:taskName="delete-professional">
+      <bpmn2:incoming>Flow_1stqgns</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_05b8nx2</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1t9novn">
+        <bpmn2:dataInput id="_Activity_1t9novn_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_1t9novn_person_role_idInput" drools:dtype="String" name="person_role_id" />
+        <bpmn2:inputSet id="inputSet_Activity_1t9novn">
+          <bpmn2:dataInputRefs>_Activity_1t9novn_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1t9novn_person_role_idInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_1t9novn">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_1t9novn_TaskType">
+        <bpmn2:targetRef>_Activity_1t9novn_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1t9novn_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">delete-professional</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1t9novn_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1t9novn_person_role_id">
+        <bpmn2:sourceRef>person_role_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1t9novn_person_role_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_0miojc4" name="Get Professional Details" drools:taskName="get-profession-details">
+      <bpmn2:incoming>Flow_19u9hdm</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_14zc9sk</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0miojc4">
+        <bpmn2:dataInput id="_Activity_0miojc4_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_0miojc4_person_role_idInput" drools:dtype="String" name="person_role_id" />
+        <bpmn2:dataOutput id="_Activity_0miojc4_document_idOutput" drools:dtype="String" name="document_id" />
+        <bpmn2:dataOutput id="_Activity_0miojc4_address_idOutput" drools:dtype="String" name="address_id" />
+        <bpmn2:dataOutput id="_Activity_0miojc4_address_document_idOutput" drools:dtype="String" name="address_document_id" />
+        <bpmn2:inputSet id="inputSet_Activity_0miojc4">
+          <bpmn2:dataInputRefs>_Activity_0miojc4_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0miojc4_person_role_idInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_0miojc4">
+          <bpmn2:dataOutputRefs>_Activity_0miojc4_document_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_0miojc4_address_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_0miojc4_address_document_idOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_0miojc4_TaskType">
+        <bpmn2:targetRef>_Activity_0miojc4_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0miojc4_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">get-profession-details</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0miojc4_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0miojc4_person_role_id">
+        <bpmn2:sourceRef>person_role_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0miojc4_person_role_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0miojc4_document_id">
+        <bpmn2:sourceRef>_Activity_0miojc4_document_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>document_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0miojc4_address_id">
+        <bpmn2:sourceRef>_Activity_0miojc4_address_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>address_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0miojc4_address_document_id">
+        <bpmn2:sourceRef>_Activity_0miojc4_address_document_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>address_document_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_08v0l4w" name="Notifies  person on acceptance" drools:taskName="send-user-message">
+      <bpmn2:incoming>Flow_02hxglg</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1bc9crh</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_08v0l4w">
+        <bpmn2:dataInput id="_Activity_08v0l4w_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_08v0l4w_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_08v0l4w_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:dataInput id="_Activity_08v0l4w_emailInput" drools:dtype="String" name="email" />
+        <bpmn2:dataInput id="_Activity_08v0l4w_device_tokenInput" drools:dtype="String" name="device_token" />
+        <bpmn2:dataInput id="_Activity_08v0l4w_mobile_numberInput" drools:dtype="String" name="mobile_number" />
+        <bpmn2:dataInput id="_Activity_08v0l4w_first_nameInput" drools:dtype="String" name="first_name" />
+        <bpmn2:dataInput id="_Activity_08v0l4w_last_nameInput" drools:dtype="String" name="last_name" />
+        <bpmn2:inputSet id="inputSet_Activity_08v0l4w">
+          <bpmn2:dataInputRefs>_Activity_08v0l4w_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_08v0l4w_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_08v0l4w_subjectInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_08v0l4w_emailInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_08v0l4w_device_tokenInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_08v0l4w_mobile_numberInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_08v0l4w_first_nameInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_08v0l4w_last_nameInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_08v0l4w">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_08v0l4w_TaskType">
+        <bpmn2:targetRef>_Activity_08v0l4w_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_08v0l4w_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">send-user-message</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_08v0l4w_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_08v0l4w_body">
+        <bpmn2:targetRef>_Activity_08v0l4w_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_08v0l4w_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Your professional profile: " + profession_type + " was NOT approved with  the following comment: "+ approval_comment +". Please try adding your profile again with accurate information."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_08v0l4w_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_08v0l4w_subject">
+        <bpmn2:targetRef>_Activity_08v0l4w_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_08v0l4w_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Professional profile: " + profession_type +" disapproved."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_08v0l4w_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_08v0l4w_email">
+        <bpmn2:sourceRef>email</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_08v0l4w_emailInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_08v0l4w_device_token">
+        <bpmn2:sourceRef>device_token</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_08v0l4w_device_tokenInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_08v0l4w_mobile_number">
+        <bpmn2:sourceRef>mobile_number</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_08v0l4w_mobile_numberInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_08v0l4w_first_name">
+        <bpmn2:sourceRef>first_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_08v0l4w_first_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_08v0l4w_last_name">
+        <bpmn2:sourceRef>last_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_08v0l4w_last_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_02m143y" name="Notifies  person on rejection" drools:taskName="send-user-message">
+      <bpmn2:incoming>Flow_14cd5wx</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0426hgy</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_02m143y">
+        <bpmn2:dataInput id="_Activity_02m143y_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_02m143y_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_02m143y_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:dataInput id="_Activity_02m143y_emailInput" drools:dtype="String" name="email" />
+        <bpmn2:dataInput id="_Activity_02m143y_device_tokenInput" drools:dtype="String" name="device_token" />
+        <bpmn2:dataInput id="_Activity_02m143y_mobile_numberInput" drools:dtype="String" name="mobile_number" />
+        <bpmn2:dataInput id="_Activity_02m143y_first_nameInput" drools:dtype="String" name="first_name" />
+        <bpmn2:dataInput id="_Activity_02m143y_last_nameInput" drools:dtype="String" name="last_name" />
+        <bpmn2:inputSet id="inputSet_Activity_02m143y">
+          <bpmn2:dataInputRefs>_Activity_02m143y_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_subjectInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_emailInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_device_tokenInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_mobile_numberInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_first_nameInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_02m143y_last_nameInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_02m143y">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_TaskType">
+        <bpmn2:targetRef>_Activity_02m143y_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_02m143y_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">send-user-message</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_02m143y_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_body">
+        <bpmn2:targetRef>_Activity_02m143y_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_02m143y_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Your professional profile: " + profession_type + " was NOT approved with  the following comment: "+ approval_comment +". Please try adding your profile again with accurate information."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_02m143y_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_subject">
+        <bpmn2:targetRef>_Activity_02m143y_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_02m143y_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Professional profile: " + profession_type +" disapproved."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_02m143y_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_email">
+        <bpmn2:sourceRef>email</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_02m143y_emailInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_device_token">
+        <bpmn2:sourceRef>device_token</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_02m143y_device_tokenInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_mobile_number">
+        <bpmn2:sourceRef>mobile_number</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_02m143y_mobile_numberInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_first_name">
+        <bpmn2:sourceRef>first_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_02m143y_first_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_02m143y_last_name">
+        <bpmn2:sourceRef>last_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_02m143y_last_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_15839ek" name="Notify Admins on professional verification" drools:taskName="notify-admins">
+      <bpmn2:incoming>Flow_0php9gq</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0z6bx85</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_15839ek">
+        <bpmn2:dataInput id="_Activity_15839ek_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_15839ek_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_15839ek_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:inputSet id="inputSet_Activity_15839ek">
+          <bpmn2:dataInputRefs>_Activity_15839ek_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_15839ek_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_15839ek_subjectInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_15839ek">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_15839ek_TaskType">
+        <bpmn2:targetRef>_Activity_15839ek_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_15839ek_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">notify-admins</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_15839ek_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_15839ek_body">
+        <bpmn2:targetRef>_Activity_15839ek_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_15839ek_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Just notifying you that you have a new profesional verification request from " + first_name +" " + last_name +"."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_15839ek_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_15839ek_subject">
+        <bpmn2:targetRef>_Activity_15839ek_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_15839ek_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Professional verification required"}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_15839ek_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_17w3gpo" name="Verifiy professional detail" drools:taskName="verify-professional">
+      <bpmn2:incoming>Flow_1i65if7</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_02hxglg</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_17w3gpo">
+        <bpmn2:dataInput id="_Activity_17w3gpo_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_17w3gpo_person_role_idInput" drools:dtype="String" name="person_role_id" />
+        <bpmn2:inputSet id="inputSet_Activity_17w3gpo">
+          <bpmn2:dataInputRefs>_Activity_17w3gpo_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_17w3gpo_person_role_idInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_17w3gpo">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_17w3gpo_TaskType">
+        <bpmn2:targetRef>_Activity_17w3gpo_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_17w3gpo_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">verify-professional</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_17w3gpo_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_17w3gpo_person_role_id">
+        <bpmn2:sourceRef>person_role_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_17w3gpo_person_role_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_1xnp71v" name="Delete professional address document" drools:taskName="delete-document">
+      <bpmn2:incoming>Flow_1q1cjba</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0j1l5ef</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1xnp71v">
+        <bpmn2:dataInput id="_Activity_1xnp71v_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_1xnp71v_document_idInput" drools:dtype="String" name="document_id" />
+        <bpmn2:inputSet id="inputSet_Activity_1xnp71v">
+          <bpmn2:dataInputRefs>_Activity_1xnp71v_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1xnp71v_document_idInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_1xnp71v">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_1xnp71v_TaskType">
+        <bpmn2:targetRef>_Activity_1xnp71v_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1xnp71v_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">delete-document</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1xnp71v_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1xnp71v_document_id">
+        <bpmn2:sourceRef>address_document_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1xnp71v_document_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_0er6mc8" name="Delete professional proof document" drools:taskName="delete-document">
+      <bpmn2:incoming>Flow_0cevywf</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_098zmrb</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0er6mc8">
+        <bpmn2:dataInput id="_Activity_0er6mc8_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_0er6mc8_document_idInput" drools:dtype="String" name="document_id" />
+        <bpmn2:inputSet id="inputSet_Activity_0er6mc8">
+          <bpmn2:dataInputRefs>_Activity_0er6mc8_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0er6mc8_document_idInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_0er6mc8">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_0er6mc8_TaskType">
+        <bpmn2:targetRef>_Activity_0er6mc8_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0er6mc8_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">delete-document</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0er6mc8_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0er6mc8_document_id">
+        <bpmn2:sourceRef>document_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0er6mc8_document_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:exclusiveGateway id="Gateway_17t9678" gatewayDirection="Diverging">
+      <bpmn2:incoming>Flow_1dwrxp5</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_19u9hdm</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_1i65if7</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:exclusiveGateway id="Gateway_1pgfcsb" gatewayDirection="Converging">
+      <bpmn2:incoming>Flow_1bc9crh</bpmn2:incoming>
+      <bpmn2:incoming>Flow_0426hgy</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1oz88ka</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:parallelGateway id="Gateway_0ryv3yg" gatewayDirection="Diverging">
+      <bpmn2:incoming>Flow_14zc9sk</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0cevywf</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_1q1cjba</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_09l1bj0</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_1stqgns</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:parallelGateway id="Gateway_1opmdl1" gatewayDirection="Converging">
+      <bpmn2:incoming>Flow_098zmrb</bpmn2:incoming>
+      <bpmn2:incoming>Flow_0j1l5ef</bpmn2:incoming>
+      <bpmn2:incoming>Flow_1iqsy8l</bpmn2:incoming>
+      <bpmn2:incoming>Flow_05b8nx2</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_14cd5wx</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:endEvent id="Event_1vfqk4o">
+      <bpmn2:incoming>Flow_1oz88ka</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_02hxglg" sourceRef="Activity_17w3gpo" targetRef="Activity_08v0l4w" />
+    <bpmn2:sequenceFlow id="Flow_02mygdk" sourceRef="StartEvent_1" targetRef="add-professional" />
+    <bpmn2:sequenceFlow id="Flow_0426hgy" sourceRef="Activity_02m143y" targetRef="Gateway_1pgfcsb" />
+    <bpmn2:sequenceFlow id="Flow_0php9gq" sourceRef="add-professional" targetRef="Activity_15839ek" />
+    <bpmn2:sequenceFlow id="Flow_0z6bx85" sourceRef="Activity_15839ek" targetRef="Activity_0d89c17" />
+    <bpmn2:sequenceFlow id="Flow_19u9hdm" sourceRef="Gateway_17t9678" targetRef="Activity_0miojc4">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">return approved == false;</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="Flow_1bc9crh" sourceRef="Activity_08v0l4w" targetRef="Gateway_1pgfcsb" />
+    <bpmn2:sequenceFlow id="Flow_1i65if7" sourceRef="Gateway_17t9678" targetRef="Activity_17w3gpo">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">return approved == true;</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="Flow_1oz88ka" sourceRef="Gateway_1pgfcsb" targetRef="Event_1vfqk4o" />
+    <bpmn2:sequenceFlow id="Flow_1dwrxp5" sourceRef="Activity_0d89c17" targetRef="Gateway_17t9678" />
+    <bpmn2:sequenceFlow id="Flow_14zc9sk" sourceRef="Activity_0miojc4" targetRef="Gateway_0ryv3yg" />
+    <bpmn2:sequenceFlow id="Flow_0cevywf" sourceRef="Gateway_0ryv3yg" targetRef="Activity_0er6mc8" />
+    <bpmn2:sequenceFlow id="Flow_1q1cjba" sourceRef="Gateway_0ryv3yg" targetRef="Activity_1xnp71v" />
+    <bpmn2:sequenceFlow id="Flow_09l1bj0" sourceRef="Gateway_0ryv3yg" targetRef="Activity_0q4r85k" />
+    <bpmn2:sequenceFlow id="Flow_1stqgns" sourceRef="Gateway_0ryv3yg" targetRef="Activity_1t9novn" />
+    <bpmn2:sequenceFlow id="Flow_098zmrb" sourceRef="Activity_0er6mc8" targetRef="Gateway_1opmdl1" />
+    <bpmn2:sequenceFlow id="Flow_0j1l5ef" sourceRef="Activity_1xnp71v" targetRef="Gateway_1opmdl1" />
+    <bpmn2:sequenceFlow id="Flow_1iqsy8l" sourceRef="Activity_0q4r85k" targetRef="Gateway_1opmdl1" />
+    <bpmn2:sequenceFlow id="Flow_05b8nx2" sourceRef="Activity_1t9novn" targetRef="Gateway_1opmdl1" />
+    <bpmn2:sequenceFlow id="Flow_14cd5wx" sourceRef="Gateway_1opmdl1" targetRef="Activity_02m143y" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="add-profession">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="112" y="482" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17w3gpo_di" bpmnElement="Activity_17w3gpo">
+        <dc:Bounds x="710" y="580" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_01v34oh" bpmnElement="Activity_08v0l4w">
+        <dc:Bounds x="870" y="580" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_04ak5m0" bpmnElement="Activity_0q4r85k">
+        <dc:Bounds x="780" y="330" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1t9novn_di" bpmnElement="Activity_1t9novn">
+        <dc:Bounds x="780" y="430" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0ryv3yg_di" bpmnElement="Gateway_0ryv3yg">
+        <dc:Bounds x="685" y="275" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1opmdl1_di" bpmnElement="Gateway_1opmdl1">
+        <dc:Bounds x="915" y="275" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_02m143y_di" bpmnElement="Activity_02m143y">
+        <dc:Bounds x="1030" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0yoign8" bpmnElement="Gateway_1pgfcsb" isMarkerVisible="true">
+        <dc:Bounds x="1055" y="475" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1vfqk4o_di" bpmnElement="Event_1vfqk4o">
+        <dc:Bounds x="1172" y="482" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04vtf2e_di" bpmnElement="add-professional">
+        <dc:Bounds x="170" y="460" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_08qqpc6" bpmnElement="Activity_15839ek">
+        <dc:Bounds x="300" y="460" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0d89c17_di" bpmnElement="Activity_0d89c17">
+        <dc:Bounds x="430" y="460" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_17t9678_di" bpmnElement="Gateway_17t9678" isMarkerVisible="true">
+        <dc:Bounds x="585" y="475" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0miojc4_di" bpmnElement="Activity_0miojc4">
+        <dc:Bounds x="560" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0er6mc8_di" bpmnElement="Activity_0er6mc8">
+        <dc:Bounds x="780" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xnp71v_di" bpmnElement="Activity_1xnp71v">
+        <dc:Bounds x="780" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_02mygdk_di" bpmnElement="Flow_02mygdk">
+        <di:waypoint x="148" y="500" />
+        <di:waypoint x="170" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i65if7_di" bpmnElement="Flow_1i65if7">
+        <di:waypoint x="610" y="525" />
+        <di:waypoint x="610" y="620" />
+        <di:waypoint x="710" y="620" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02hxglg_di" bpmnElement="Flow_02hxglg">
+        <di:waypoint x="810" y="620" />
+        <di:waypoint x="870" y="620" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bc9crh_di" bpmnElement="Flow_1bc9crh">
+        <di:waypoint x="970" y="620" />
+        <di:waypoint x="1080" y="620" />
+        <di:waypoint x="1080" y="525" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09l1bj0_di" bpmnElement="Flow_09l1bj0">
+        <di:waypoint x="710" y="325" />
+        <di:waypoint x="710" y="370" />
+        <di:waypoint x="780" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iqsy8l_di" bpmnElement="Flow_1iqsy8l">
+        <di:waypoint x="880" y="370" />
+        <di:waypoint x="940" y="370" />
+        <di:waypoint x="940" y="325" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1stqgns_di" bpmnElement="Flow_1stqgns">
+        <di:waypoint x="710" y="325" />
+        <di:waypoint x="710" y="470" />
+        <di:waypoint x="780" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05b8nx2_di" bpmnElement="Flow_05b8nx2">
+        <di:waypoint x="880" y="470" />
+        <di:waypoint x="940" y="470" />
+        <di:waypoint x="940" y="325" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14zc9sk_di" bpmnElement="Flow_14zc9sk">
+        <di:waypoint x="660" y="300" />
+        <di:waypoint x="685" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cevywf_di" bpmnElement="Flow_0cevywf">
+        <di:waypoint x="710" y="275" />
+        <di:waypoint x="710" y="120" />
+        <di:waypoint x="780" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q1cjba_di" bpmnElement="Flow_1q1cjba">
+        <di:waypoint x="735" y="300" />
+        <di:waypoint x="758" y="300" />
+        <di:waypoint x="758" y="250" />
+        <di:waypoint x="780" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_098zmrb_di" bpmnElement="Flow_098zmrb">
+        <di:waypoint x="880" y="120" />
+        <di:waypoint x="940" y="120" />
+        <di:waypoint x="940" y="275" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j1l5ef_di" bpmnElement="Flow_0j1l5ef">
+        <di:waypoint x="880" y="250" />
+        <di:waypoint x="898" y="250" />
+        <di:waypoint x="898" y="300" />
+        <di:waypoint x="915" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14cd5wx_di" bpmnElement="Flow_14cd5wx">
+        <di:waypoint x="965" y="300" />
+        <di:waypoint x="1030" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0426hgy_di" bpmnElement="Flow_0426hgy">
+        <di:waypoint x="1080" y="340" />
+        <di:waypoint x="1080" y="475" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1oz88ka_di" bpmnElement="Flow_1oz88ka">
+        <di:waypoint x="1105" y="500" />
+        <di:waypoint x="1172" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0php9gq_di" bpmnElement="Flow_0php9gq">
+        <di:waypoint x="270" y="500" />
+        <di:waypoint x="300" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z6bx85_di" bpmnElement="Flow_0z6bx85">
+        <di:waypoint x="400" y="500" />
+        <di:waypoint x="430" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dwrxp5_di" bpmnElement="Flow_1dwrxp5">
+        <di:waypoint x="530" y="500" />
+        <di:waypoint x="585" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19u9hdm_di" bpmnElement="Flow_19u9hdm">
+        <di:waypoint x="610" y="475" />
+        <di:waypoint x="610" y="340" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

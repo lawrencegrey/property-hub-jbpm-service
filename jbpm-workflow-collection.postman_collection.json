@@ -1,0 +1,1527 @@
+{
+	"info": {
+		"_postman_id": "jbpm-workflow-collection",
+		"name": "jbpm-workflow-collection",
+		"description": "Postman collection for the jBPM Workflow Engine API.\n\nBase URL: http://localhost:8006\nAuthentication: Bearer Token (Keycloak OAuth2)\n\nRealm: property-management-platform\nClient: property-platform-backend-services\nToken URL: http://localhost:8080/realms/property-management-platform/protocol/openid-connect/token",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Auto-fetch Keycloak token before each request",
+					"const tokenUrl = pm.variables.get('keycloak_url') + '/realms/' + pm.variables.get('realm') + '/protocol/openid-connect/token';",
+					"",
+					"pm.sendRequest({",
+					"    url: tokenUrl,",
+					"    method: 'POST',",
+					"    header: { 'Content-Type': 'application/x-www-form-urlencoded' },",
+					"    body: {",
+					"        mode: 'urlencoded',",
+					"        urlencoded: [",
+					"            { key: 'grant_type', value: 'client_credentials' },",
+					"            { key: 'client_id', value: pm.variables.get('client_id') },",
+					"            { key: 'client_secret', value: pm.variables.get('client_secret') }",
+					"        ]",
+					"    }",
+					"}, function (err, res) {",
+					"    if (!err && res.code === 200) {",
+					"        pm.variables.set('access_token', res.json().access_token);",
+					"    }",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8006",
+			"type": "string"
+		},
+		{
+			"key": "keycloak_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "realm",
+			"value": "property-management-platform",
+			"type": "string"
+		},
+		{
+			"key": "client_id",
+			"value": "property-platform-backend-services",
+			"type": "string"
+		},
+		{
+			"key": "client_secret",
+			"value": "GIv2HhpLuX7Dy4Ge2IjtGXgaPqbBzOII",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "process_id",
+			"value": "add-property",
+			"type": "string"
+		},
+		{
+			"key": "process_instance_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "task_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "person_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "property_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "document_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "offer_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "engagement_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "engagement_party_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "person_role_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "address_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Process Management",
+			"description": "Endpoints for managing jBPM process instances",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/processes/health",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "processes", "health"]
+						},
+						"description": "Check the health of the process management service"
+					}
+				},
+				{
+					"name": "List Process Definitions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/processes/definitions",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "processes", "definitions"]
+						},
+						"description": "Retrieve all deployed process definitions from the KIE server"
+					}
+				},
+				{
+					"name": "Start Process Instance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"person_id\": \"{{person_id}}\",\n    \"property_id\": \"{{property_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/processes/{{process_id}}/start",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "processes", "{{process_id}}", "start"]
+						},
+						"description": "Start a new process instance for the given process definition. Variables in the body are passed as process variables."
+					}
+				},
+				{
+					"name": "Start Batch Process Instances",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"person_id\": \"uuid-1\",\n        \"property_id\": \"uuid-2\"\n    },\n    {\n        \"person_id\": \"uuid-3\",\n        \"property_id\": \"uuid-4\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/processes/{{process_id}}/instances/batch",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "processes", "{{process_id}}", "instances", "batch"]
+						},
+						"description": "Start multiple process instances for the same process definition in one call"
+					}
+				},
+				{
+					"name": "Get Process Instance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/processes/instances/{{process_instance_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "processes", "instances", "{{process_instance_id}}"]
+						},
+						"description": "Get details of a specific process instance by its ID"
+					}
+				},
+				{
+					"name": "Get Process Instance Variables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/processes/instances/{{process_instance_id}}/variables",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "processes", "instances", "{{process_instance_id}}", "variables"]
+						},
+						"description": "Get all variables associated with a process instance"
+					}
+				},
+				{
+					"name": "Send Signal to Process Instance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"signal_data\": \"value\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/processes/instances/{{process_instance_id}}/signal/MySignal",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "processes", "instances", "{{process_instance_id}}", "signal", "MySignal"]
+						},
+						"description": "Send a signal to a process instance with optional data payload"
+					}
+				},
+				{
+					"name": "Cancel Process Instance",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/processes/{{process_instance_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "processes", "{{process_instance_id}}"]
+						},
+						"description": "Cancel (abort) a running process instance"
+					}
+				}
+			]
+		},
+		{
+			"name": "Task Management",
+			"description": "Endpoints for managing jBPM human tasks",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tasks/health",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tasks", "health"]
+						},
+						"description": "Check the health of the task management service"
+					}
+				},
+				{
+					"name": "Task Summary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tasks/summary",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tasks", "summary"]
+						},
+						"description": "Get task summary statistics"
+					}
+				},
+				{
+					"name": "Get Tasks by User (Ready)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tasks/user/{{user_id}}?state=Ready",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tasks", "user", "{{user_id}}"],
+							"query": [
+								{
+									"key": "state",
+									"value": "Ready",
+									"description": "Task state filter: Ready, Reserved, InProgress, Completed"
+								}
+							]
+						},
+						"description": "Get all tasks assigned to a user filtered by state"
+					}
+				},
+				{
+					"name": "Get Tasks by User (Reserved)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tasks/user/{{user_id}}?state=Reserved",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tasks", "user", "{{user_id}}"],
+							"query": [
+								{
+									"key": "state",
+									"value": "Reserved"
+								}
+							]
+						},
+						"description": "Get all Reserved tasks for a user"
+					}
+				},
+				{
+					"name": "Get Tasks by User (InProgress)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tasks/user/{{user_id}}?state=InProgress",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tasks", "user", "{{user_id}}"],
+							"query": [
+								{
+									"key": "state",
+									"value": "InProgress"
+								}
+							]
+						},
+						"description": "Get all InProgress tasks for a user"
+					}
+				},
+				{
+					"name": "Get Tasks by Process Instance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tasks/process/instance/{{process_instance_id}}?state=Ready",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tasks", "process", "instance", "{{process_instance_id}}"],
+							"query": [
+								{
+									"key": "state",
+									"value": "Ready",
+									"description": "Task state filter: Ready, Reserved, InProgress, Completed"
+								}
+							]
+						},
+						"description": "Get all tasks for a specific process instance filtered by state"
+					}
+				},
+				{
+					"name": "Assign Task",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tasks/{{task_id}}/assign/{{person_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tasks", "{{task_id}}", "assign", "{{person_id}}"]
+						},
+						"description": "Assign a task to a specific person"
+					}
+				},
+				{
+					"name": "Start Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{user_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/tasks/{{task_id}}/start",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tasks", "{{task_id}}", "start"]
+						},
+						"description": "Start a task for a specific user"
+					}
+				},
+				{
+					"name": "Complete Task",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"variables\": [\n        {\n            \"name\": \"approved\",\n            \"value\": \"true\"\n        },\n        {\n            \"name\": \"comment\",\n            \"value\": \"Looks good\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/tasks/{{task_id}}/complete",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tasks", "{{task_id}}", "complete"]
+						},
+						"description": "Complete a task with output variables"
+					}
+				},
+				{
+					"name": "Reassign Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{user_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/tasks/{{task_id}}/reassign",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tasks", "{{task_id}}", "reassign"]
+						},
+						"description": "Reassign a task to a different user"
+					}
+				}
+			]
+		},
+		{
+			"name": "Debug",
+			"description": "Debug and diagnostic endpoints",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/debug/health",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "debug", "health"]
+						},
+						"description": "Check the health of the debug service"
+					}
+				},
+				{
+					"name": "Get Access Token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/debug/token",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "debug", "token"]
+						},
+						"description": "Retrieve the current access token info (length and prefix)"
+					}
+				},
+				{
+					"name": "Fetch Document",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/debug/document/{{document_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "debug", "document", "{{document_id}}"]
+						},
+						"description": "Test fetching a document from the document service"
+					}
+				},
+				{
+					"name": "Fetch Person",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/debug/person/{{person_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "debug", "person", "{{person_id}}"]
+						},
+						"description": "Test fetching a person from the person service"
+					}
+				},
+				{
+					"name": "Fetch Property",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/debug/property/{{property_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "debug", "property", "{{property_id}}"]
+						},
+						"description": "Test fetching a property from the property service"
+					}
+				}
+			]
+		},
+		{
+			"name": "Workers",
+			"description": "Internal worker endpoints used by jBPM service tasks to interact with external services",
+			"item": [
+				{
+					"name": "Agreement",
+					"description": "Agreement worker endpoints for activating rental, sale, and lease agreements",
+					"item": [
+						{
+							"name": "Activate Rental Agreement",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"rental_id\": \"{{offer_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/agreement/activate-rental",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "agreement", "activate-rental"]
+								},
+								"description": "Activate a rental agreement. Sets rentalStatus=AVAILABLE and active=true."
+							}
+						},
+						{
+							"name": "Activate Sale Agreement",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"sale_id\": \"{{offer_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/agreement/activate-sale",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "agreement", "activate-sale"]
+								},
+								"description": "Activate a sale agreement. Sets saleStatus=LISTED, listingDate=now, active=true."
+							}
+						},
+						{
+							"name": "Activate Lease Agreement",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"lease_id\": \"{{offer_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/agreement/activate-lease",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "agreement", "activate-lease"]
+								},
+								"description": "Activate a lease agreement. Sets leaseStatus=ACTIVE, active=true."
+							}
+						}
+					]
+				},
+				{
+					"name": "Document",
+					"description": "Document worker endpoints for managing document verification and deletion",
+					"item": [
+						{
+							"name": "Update Manual Review",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document_id\": \"{{document_id}}\",\n    \"verification_reason\": \"Document verified manually by admin\",\n    \"is_verified\": true\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/document/update-manual-review",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "document", "update-manual-review"]
+								},
+								"description": "Update manual review status of a document"
+							}
+						},
+						{
+							"name": "Delete Property Documents",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"property_id\": \"{{property_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/document/delete-property-documents",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "document", "delete-property-documents"]
+								},
+								"description": "Delete all documents associated with a property"
+							}
+						},
+						{
+							"name": "Delete Person Documents",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_id\": \"{{person_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/document/delete-person-documents",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "document", "delete-person-documents"]
+								},
+								"description": "Delete all documents associated with a person"
+							}
+						},
+						{
+							"name": "Delete Document",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document_id\": \"{{document_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/document/delete",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "document", "delete"]
+								},
+								"description": "Delete a single document by ID"
+							}
+						}
+					]
+				},
+				{
+					"name": "Notification",
+					"description": "Notification worker endpoints for sending emails, SMS, and push notifications",
+					"item": [
+						{
+							"name": "Submit Report",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"subject\": \"Property Inspection Report\",\n    \"body\": \"Report details here...\",\n    \"person_id\": \"{{person_id}}\",\n    \"professional_id\": \"\",\n    \"property_id\": \"{{property_id}}\",\n    \"property_name\": \"123 Main Street\",\n    \"reporter_id\": \"{{person_id}}\",\n    \"reporter_name\": \"John Doe\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/notification/submit-report",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "notification", "submit-report"]
+								},
+								"description": "Format and submit a report notification"
+							}
+						},
+						{
+							"name": "Notify Admins",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"subject\": \"Admin Alert\",\n    \"body\": \"Important notification for administrators\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/notification/notify-admins",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "notification", "notify-admins"]
+								},
+								"description": "Send email notification to all configured admin email addresses"
+							}
+						},
+						{
+							"name": "Send SMS Notification",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"mobile_number\": \"+1234567890\",\n    \"body\": \"Your verification code is 123456\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/notification/send-sms-notification",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "notification", "send-sms-notification"]
+								},
+								"description": "Send an SMS notification to a mobile number"
+							}
+						},
+						{
+							"name": "Send Email Notification",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"user@example.com\",\n    \"subject\": \"Property Update\",\n    \"body\": \"Your property listing has been updated.\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/notification/send-email-notification",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "notification", "send-email-notification"]
+								},
+								"description": "Send an email notification"
+							}
+						},
+						{
+							"name": "Send Push Notification",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"device_token\": \"fcm-device-token-here\",\n    \"subject\": \"New Offer\",\n    \"body\": \"You have received a new offer on your property.\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/notification/send-pushed-notification",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "notification", "send-pushed-notification"]
+								},
+								"description": "Send a push notification to a device"
+							}
+						},
+						{
+							"name": "Send All Notifications",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"user@example.com\",\n    \"mobile_number\": \"+1234567890\",\n    \"device_token\": \"fcm-device-token-here\",\n    \"subject\": \"Important Update\",\n    \"body\": \"Your property listing status has changed.\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/notification/send-all-notifications",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "notification", "send-all-notifications"]
+								},
+								"description": "Send notifications via all channels (email, SMS, push). Include whichever contact fields are available."
+							}
+						},
+						{
+							"name": "Populate Document Notification",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"party_type\": \"BUYER\",\n    \"document_type\": \"TITLE_DEED\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/notification/populate-doc-notification",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "notification", "populate-doc-notification"]
+								},
+								"description": "Generate notification subject and body text based on party type and document type"
+							}
+						}
+					]
+				},
+				{
+					"name": "Person",
+					"description": "Person worker endpoints for managing person data, KYC, roles, and addresses",
+					"item": [
+						{
+							"name": "Update KYC Data",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_id\": \"{{person_id}}\",\n    \"document_id\": \"{{document_id}}\",\n    \"document_type\": \"PASSPORT_PIC\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/update-kyc-data",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "update-kyc-data"]
+								},
+								"description": "Update KYC verification flags for a person. Document types: PASSPORT_PIC, PROOF_OF_ADDRESS, TAX_CARD, LIVELINESS, ID_CARD (default)"
+							}
+						},
+						{
+							"name": "Delete KYC Data",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_id\": \"{{person_id}}\",\n    \"document_id\": \"{{document_id}}\",\n    \"document_type\": \"PASSPORT_PIC\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/delete-kyc-data",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "delete-kyc-data"]
+								},
+								"description": "Reset KYC verification flags for the given document type"
+							}
+						},
+						{
+							"name": "Get Person Details",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_id\": \"{{person_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/get-person-details",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "get-person-details"]
+								},
+								"description": "Get person details including name, email, mobile number, and device token"
+							}
+						},
+						{
+							"name": "Get Person Role Details",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_role_id\": \"{{person_role_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/get-person-role-details",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "get-person-role-details"]
+								},
+								"description": "Get details of a person role including associated document and address IDs"
+							}
+						},
+						{
+							"name": "Delete Person Role",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_role_id\": \"{{person_role_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/delete-person-role",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "delete-person-role"]
+								},
+								"description": "Delete a person role"
+							}
+						},
+						{
+							"name": "Activate Person Role",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_role_id\": \"{{person_role_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/activate-person-role",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "activate-person-role"]
+								},
+								"description": "Activate a person role (sets verified=true, active=true)"
+							}
+						},
+						{
+							"name": "Verify Person Role",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_role_id\": \"{{person_role_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/verify-person-role",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "verify-person-role"]
+								},
+								"description": "Verify a person role"
+							}
+						},
+						{
+							"name": "Delete Address",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"address_id\": \"{{address_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/delete-address",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "delete-address"]
+								},
+								"description": "Delete an address by ID"
+							}
+						},
+						{
+							"name": "Verify Address",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"address_id\": \"{{address_id}}\",\n    \"document_id\": \"{{document_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/verify-address",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "verify-address"]
+								},
+								"description": "Verify an address. Provide address_id directly or document_id to look up the address."
+							}
+						},
+						{
+							"name": "Activate Person",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_id\": \"{{person_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/activate-person",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "activate-person"]
+								},
+								"description": "Activate a person account (sets active=true, verified=true)"
+							}
+						},
+						{
+							"name": "Delete All Person Data",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_id\": \"{{person_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/person/delete-all-person-data",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "person", "delete-all-person-data"]
+								},
+								"description": "Delete all data associated with a person (cascade delete)"
+							}
+						}
+					]
+				},
+				{
+					"name": "Property",
+					"description": "Property worker endpoints for managing properties, offers, engagements, and parties",
+					"item": [
+						{
+							"name": "Update Property Data",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"property_id\": \"{{property_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/update-property-data",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "update-property-data"]
+								},
+								"description": "Fetch and re-save a property (placeholder for field-level updates)"
+							}
+						},
+						{
+							"name": "Delete Property",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"property_id\": \"{{property_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/delete-property",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "delete-property"]
+								},
+								"description": "Delete a property and all related data"
+							}
+						},
+						{
+							"name": "Activate Property",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"property_id\": \"{{property_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/activate-property",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "activate-property"]
+								},
+								"description": "Activate a property (sets verified=true, active=true, listingStatus=ACTIVE)"
+							}
+						},
+						{
+							"name": "Set Offer Status",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"property_id\": \"{{property_id}}\",\n    \"offer_status\": \"true\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/set-offer-status",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "set-offer-status"]
+								},
+								"description": "Set whether a property is under offer / accepting offers. offer_status: 'true' or 'false'"
+							}
+						},
+						{
+							"name": "Create Offer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"property_id\": \"{{property_id}}\",\n    \"person_id\": \"{{person_id}}\",\n    \"offer_amount\": 250000.00,\n    \"offer_type\": \"PURCHASE\",\n    \"loan_financed\": false,\n    \"use_platform\": true,\n    \"process_instance_id\": \"{{process_instance_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/create-offer",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "create-offer"]
+								},
+								"description": "Create a new offer on a property"
+							}
+						},
+						{
+							"name": "Accept Offer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"offer_id\": \"{{offer_id}}\",\n    \"process_instance_id\": \"{{process_instance_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/accept-offer",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "accept-offer"]
+								},
+								"description": "Accept an offer (sets status=ACCEPTED, optionally updates process instance)"
+							}
+						},
+						{
+							"name": "Update Offer with Process Instance",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"offer_id\": \"{{offer_id}}\",\n    \"process_instance_id\": \"{{process_instance_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/update-offer-with-process-instance",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "update-offer-with-process-instance"]
+								},
+								"description": "Update only the process instance ID on an existing offer"
+							}
+						},
+						{
+							"name": "Delete Offer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"offer_id\": \"{{offer_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/delete-offer",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "delete-offer"]
+								},
+								"description": "Delete an offer"
+							}
+						},
+						{
+							"name": "Create Engagement",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"property_id\": \"{{property_id}}\",\n    \"transaction_type\": \"SALE\",\n    \"property_type\": \"RESIDENTIAL\",\n    \"offer_id\": \"{{offer_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/create-engagement",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "create-engagement"]
+								},
+								"description": "Create a new engagement for a property"
+							}
+						},
+						{
+							"name": "Add Engagement (Alias)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"property_id\": \"{{property_id}}\",\n    \"transaction_type\": \"SALE\",\n    \"property_type\": \"RESIDENTIAL\",\n    \"offer_id\": \"{{offer_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/add-engagement",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "add-engagement"]
+								},
+								"description": "Alias for create-engagement"
+							}
+						},
+						{
+							"name": "Create Engagement Party",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"engagement_id\": \"{{engagement_id}}\",\n    \"property_id\": \"{{property_id}}\",\n    \"person_id\": \"{{person_id}}\",\n    \"person_type\": \"BUYER\",\n    \"is_primary\": true,\n    \"represents\": \"SELF\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/create-engagement-party",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "create-engagement-party"]
+								},
+								"description": "Add a party to an engagement"
+							}
+						},
+						{
+							"name": "Add Engagement Party (Alias)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"engagement_id\": \"{{engagement_id}}\",\n    \"property_id\": \"{{property_id}}\",\n    \"person_id\": \"{{person_id}}\",\n    \"person_type\": \"SELLER\",\n    \"is_primary\": false,\n    \"represents\": \"CLIENT\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/add-engagement-party",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "add-engagement-party"]
+								},
+								"description": "Alias for create-engagement-party"
+							}
+						},
+						{
+							"name": "Delete Engagement Party",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"engagement_party_id\": \"{{engagement_party_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/delete-engagement-party",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "delete-engagement-party"]
+								},
+								"description": "Delete an engagement party"
+							}
+						},
+						{
+							"name": "Activate Engagement Party",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"engagement_party_id\": \"{{engagement_party_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/activate-engagement-party",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "activate-engagement-party"]
+								},
+								"description": "Activate an engagement party (sets verified=true, active=true)"
+							}
+						},
+						{
+							"name": "Get Buyer and Seller Details",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"buyer_id\": \"{{person_id}}\",\n    \"seller_id\": \"{{person_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/get-buyer-seller-details",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "get-buyer-seller-details"]
+								},
+								"description": "Get contact details for both buyer and seller (name, email, mobile, device token)"
+							}
+						},
+						{
+							"name": "Get Requester and Professional Details",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"person_id\": \"{{person_id}}\",\n    \"party_id\": \"{{engagement_party_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/get-requester-professional-details",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "get-requester-professional-details"]
+								},
+								"description": "Get contact details for a requester and the professional party"
+							}
+						},
+						{
+							"name": "Notify Participants",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"engagement_id\": \"{{engagement_id}}\",\n    \"subject\": \"Engagement Update\",\n    \"body\": \"There has been an update to your engagement.\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/property/notify-participants",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "property", "notify-participants"]
+								},
+								"description": "Send email, push, and SMS notifications to all parties in an engagement"
+							}
+						}
+					]
+				},
+				{
+					"name": "Verification",
+					"description": "Verification worker endpoints for document verification",
+					"item": [
+						{
+							"name": "Verify Document",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document_id\": \"{{document_id}}\",\n    \"passport_pic_doc_id\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/workers/verification/verify-document",
+									"host": ["{{base_url}}"],
+									"path": ["api", "v1", "workers", "verification", "verify-document"]
+								},
+								"description": "Verify a document by downloading and analyzing it. Routes to specific verification logic based on document type (PASSPORT, ID_CARD, PROOF_OF_ADDRESS, PROFESSIONAL_LICENSE, TAX_CARD). For ID_CARD type, provide passport_pic_doc_id for face comparison."
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

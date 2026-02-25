@@ -1,0 +1,6 @@
+FROM quay.io/kiegroup/jbpm-server-full:7.74.0.Final
+
+# Add admin user to ApplicationRealm with required roles
+RUN /opt/jboss/wildfly/bin/add-user.sh -a -u admin -p admin -g admin,kie-server,rest-all,analyst,developer,manager,user --silent
+# Add kieserver user for KIE Server REST API access
+RUN /opt/jboss/wildfly/bin/add-user.sh -a -u kieserver -p kieserver -g kie-server,rest-all --silent

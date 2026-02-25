@@ -1,0 +1,32 @@
+services:
+  property-workflow-wrapper:
+    build: .
+    container_name: property-workflow-wrapper
+    ports:
+      - "8006:8006"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+      # 🔹 jBPM KIE Server connections
+      - JBPM_KIESERVER_URL=http://jbpm-server-full:8080/kie-server/services/rest/server
+      - JBPM_BUSINESS_CENTRAL_URL=http://jbpm-server-full:8080/business-central
+      - JBPM_KIE_USER=wbadmin
+      - JBPM_KIE_PASSWORD=wbadmin
+
+      # 🔹 Keycloak
+      - KEYCLOAK_URL=http://keycloak:8080
+      - KEYCLOAK_REALM=property-management-platform
+    extra_hosts:
+      - "localhost:host-gateway"
+    restart: unless-stopped
+    networks:
+      - jbpm-net
+      - property-platform
+
+networks:
+  jbpm-net:
+    external: true
+    name: jbpm-engine_jbpm-net
+  property-platform:
+    external: true
+    name: jbpm-engine_property-platform

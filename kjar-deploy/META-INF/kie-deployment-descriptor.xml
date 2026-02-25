@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<deployment-descriptor
+    xsi:schemaLocation="http://www.jboss.org/jbpm deployment-descriptor.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <persistence-unit>org.jbpm.domain</persistence-unit>
+    <audit-persistence-unit>org.jbpm.domain</audit-persistence-unit>
+    <audit-mode>JPA</audit-mode>
+    <persistence-mode>JPA</persistence-mode>
+    <runtime-strategy>PER_PROCESS_INSTANCE</runtime-strategy>
+
+    <marshalling-strategies/>
+    <event-listeners/>
+    <task-event-listeners/>
+    <globals/>
+    <work-item-handlers>
+        <!-- Document tasks -->
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>update-document-manual-review</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>delete-property-documents</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>delete-person-documents</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>delete-document</name>
+        </work-item-handler>
+
+        <!-- Person tasks -->
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>update-kyc-data</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>delete-kyc-data</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>get-person-details</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>get-profession-details</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>delete-professional</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>update-professional</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>verify-professional</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>delete-address</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>verify-address</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>activate-person</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>delete-all-person-data</name>
+        </work-item-handler>
+
+        <!-- Property tasks -->
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>update-property-data</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>delete-property</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>activate-property</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>offer-property</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>add-offer</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>update-offer</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>update-offer-with-process-instance</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>delete-offer</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>create-engagement</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>add-engagement</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>create-engagement-party</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>add-engagement-party</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>delete-engagement-party</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>update-engagement-party</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>get-offer-participants</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>get-request-participants</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>notify-participants</name>
+        </work-item-handler>
+
+        <!-- Notification tasks -->
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>submit-report</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>notify-admins</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>send-sms-notification</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>send-email-notification</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>send-pushed-notification</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>send-user-message</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>populate-doc-notification</name>
+        </work-item-handler>
+
+        <!-- Verification tasks -->
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>auto-verify-document</name>
+        </work-item-handler>
+
+        <!-- Agreement tasks -->
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>activate-rental</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>activate-sale</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>activate-lease</name>
+        </work-item-handler>
+
+        <!-- Verification / contact tasks -->
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>generate-verification-code</name>
+        </work-item-handler>
+
+        <!-- Report tasks -->
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>make-report</name>
+        </work-item-handler>
+    </work-item-handlers>
+    <environment-entries/>
+    <configurations/>
+    <required-roles/>
+    <remoteable-classes/>
+    <limit-serialization-classes>false</limit-serialization-classes>
+</deployment-descriptor>

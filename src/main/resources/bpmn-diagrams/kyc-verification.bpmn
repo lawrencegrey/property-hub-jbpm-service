@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_022x76c" targetNamespace="http://www.jboss.org/drools" expressionLanguage="http://www.mvel.org/2.0" typeLanguage="http://www.java.com/javaTypes" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <!-- ============ Item Definitions (process variables) ============ -->
+  <bpmn2:itemDefinition id="_addressItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_bodyItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_date_of_birthItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_device_tokenItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_document_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_document_typeItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_emailItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_expiry_dateItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_first_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_is_verifiedItem" structureRef="Boolean" />
+  <bpmn2:itemDefinition id="_issuerItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_kyc_typeItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_last_nameItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_messageItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_mobile_numberItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_passport_pic_doc_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_person_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_professionItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_reference_idItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_subjectItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_verification_reasonItem" structureRef="String" />
+  <!-- ============ Process ============ -->
+  <bpmn2:process id="kyc-verification" name="kyc-verification" isExecutable="true" drools:packageName="com.greysoft.jbpm_engine.processes">
+    <!-- Process-level variables -->
+    <bpmn2:property id="address" itemSubjectRef="_addressItem" name="address" />
+    <bpmn2:property id="body" itemSubjectRef="_bodyItem" name="body" />
+    <bpmn2:property id="date_of_birth" itemSubjectRef="_date_of_birthItem" name="date_of_birth" />
+    <bpmn2:property id="device_token" itemSubjectRef="_device_tokenItem" name="device_token" />
+    <bpmn2:property id="document_id" itemSubjectRef="_document_idItem" name="document_id" />
+    <bpmn2:property id="document_type" itemSubjectRef="_document_typeItem" name="document_type" />
+    <bpmn2:property id="email" itemSubjectRef="_emailItem" name="email" />
+    <bpmn2:property id="expiry_date" itemSubjectRef="_expiry_dateItem" name="expiry_date" />
+    <bpmn2:property id="first_name" itemSubjectRef="_first_nameItem" name="first_name" />
+    <bpmn2:property id="is_verified" itemSubjectRef="_is_verifiedItem" name="is_verified" />
+    <bpmn2:property id="issuer" itemSubjectRef="_issuerItem" name="issuer" />
+    <bpmn2:property id="kyc_type" itemSubjectRef="_kyc_typeItem" name="kyc_type" />
+    <bpmn2:property id="last_name" itemSubjectRef="_last_nameItem" name="last_name" />
+    <bpmn2:property id="message" itemSubjectRef="_messageItem" name="message" />
+    <bpmn2:property id="mobile_number" itemSubjectRef="_mobile_numberItem" name="mobile_number" />
+    <bpmn2:property id="passport_pic_doc_id" itemSubjectRef="_passport_pic_doc_idItem" name="passport_pic_doc_id" />
+    <bpmn2:property id="person_id" itemSubjectRef="_person_idItem" name="person_id" />
+    <bpmn2:property id="profession" itemSubjectRef="_professionItem" name="profession" />
+    <bpmn2:property id="reference_id" itemSubjectRef="_reference_idItem" name="reference_id" />
+    <bpmn2:property id="subject" itemSubjectRef="_subjectItem" name="subject" />
+    <bpmn2:property id="verification_reason" itemSubjectRef="_verification_reasonItem" name="verification_reason" />
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:outgoing>Flow_13bpygg</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:userTask id="Activity_1csov5t" name="Complete manual verification and update document details">
+      <bpmn2:incoming>Flow_0xe78ch</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_19ktbpg</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1csov5t">
+        <bpmn2:dataOutput id="_Activity_1csov5t_verification_reasonOutput" name="verification_reason" />
+        <bpmn2:dataOutput id="_Activity_1csov5t_is_verifiedOutput" name="is_verified" />
+        <bpmn2:dataOutput id="_Activity_1csov5t_document_idOutput" name="document_id" />
+        <bpmn2:dataOutput id="_Activity_1csov5t_kyc_typeOutput" name="kyc_type" />
+        <bpmn2:inputSet id="inputSet_Activity_1csov5t" />
+        <bpmn2:outputSet id="outputSet_Activity_1csov5t">
+          <bpmn2:dataOutputRefs>_Activity_1csov5t_verification_reasonOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1csov5t_is_verifiedOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1csov5t_document_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1csov5t_kyc_typeOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1csov5t_verification_reason">
+        <bpmn2:sourceRef>_Activity_1csov5t_verification_reasonOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>verification_reason</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1csov5t_is_verified">
+        <bpmn2:sourceRef>_Activity_1csov5t_is_verifiedOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>is_verified</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1csov5t_document_id">
+        <bpmn2:sourceRef>_Activity_1csov5t_document_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>document_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1csov5t_kyc_type">
+        <bpmn2:sourceRef>_Activity_1csov5t_kyc_typeOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>kyc_type</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:userTask>
+    <bpmn2:userTask id="Activity_1a3xz8p" name="Submit document for verification">
+      <bpmn2:incoming>Flow_13bpygg</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0trstrm</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1a3xz8p">
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_emailOutput" name="email" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_first_nameOutput" name="first_name" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_last_nameOutput" name="last_name" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_device_tokenOutput" name="device_token" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_mobile_numberOutput" name="mobile_number" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_person_idOutput" name="person_id" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_kyc_typeOutput" name="kyc_type" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_document_typeOutput" name="document_type" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_document_idOutput" name="document_id" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_reference_idOutput" name="reference_id" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_date_of_birthOutput" name="date_of_birth" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_expiry_dateOutput" name="expiry_date" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_addressOutput" name="address" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_professionOutput" name="profession" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_issuerOutput" name="issuer" />
+        <bpmn2:dataOutput id="_Activity_1a3xz8p_passport_pic_doc_idOutput" name="passport_pic_doc_id" />
+        <bpmn2:inputSet id="inputSet_Activity_1a3xz8p" />
+        <bpmn2:outputSet id="outputSet_Activity_1a3xz8p">
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_emailOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_first_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_last_nameOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_device_tokenOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_mobile_numberOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_person_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_kyc_typeOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_document_typeOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_document_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_reference_idOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_date_of_birthOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_expiry_dateOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_addressOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_professionOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_issuerOutput</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_Activity_1a3xz8p_passport_pic_doc_idOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_email">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_emailOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>email</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_first_name">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_first_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>first_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_last_name">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_last_nameOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>last_name</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_device_token">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_device_tokenOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>device_token</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_mobile_number">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_mobile_numberOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>mobile_number</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_person_id">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_person_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>person_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_kyc_type">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_kyc_typeOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>kyc_type</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_document_type">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_document_typeOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>document_type</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_document_id">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_document_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>document_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_reference_id">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_reference_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>reference_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_date_of_birth">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_date_of_birthOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>date_of_birth</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_expiry_date">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_expiry_dateOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>expiry_date</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_address">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_addressOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>address</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_profession">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_professionOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>profession</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_issuer">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_issuerOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>issuer</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_1a3xz8p_passport_pic_doc_id">
+        <bpmn2:sourceRef>_Activity_1a3xz8p_passport_pic_doc_idOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>passport_pic_doc_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:userTask>
+    <bpmn2:task id="Activity_1u0c18d" name="Auto Document Verification and Update Document Details" drools:taskName="auto-verify-document">
+      <bpmn2:incoming>Flow_1jmnz0p</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1kksejy</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1u0c18d">
+        <bpmn2:dataInput id="_Activity_1u0c18d_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_emailInput" drools:dtype="String" name="email" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_first_nameInput" drools:dtype="String" name="first_name" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_last_nameInput" drools:dtype="String" name="last_name" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_device_tokenInput" drools:dtype="String" name="device_token" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_mobile_numberInput" drools:dtype="String" name="mobile_number" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_person_idInput" drools:dtype="String" name="person_id" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_kyc_typeInput" drools:dtype="String" name="kyc_type" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_document_typeInput" drools:dtype="String" name="document_type" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_document_idInput" drools:dtype="String" name="document_id" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_reference_idInput" drools:dtype="String" name="reference_id" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_date_of_birthInput" drools:dtype="String" name="date_of_birth" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_expiry_dateInput" drools:dtype="String" name="expiry_date" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_addressInput" drools:dtype="String" name="address" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_professionInput" drools:dtype="String" name="profession" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_issuerInput" drools:dtype="String" name="issuer" />
+        <bpmn2:dataInput id="_Activity_1u0c18d_passport_pic_doc_idInput" drools:dtype="String" name="passport_pic_doc_id" />
+        <bpmn2:inputSet id="inputSet_Activity_1u0c18d">
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_emailInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_first_nameInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_last_nameInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_device_tokenInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_mobile_numberInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_person_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_kyc_typeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_document_typeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_document_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_reference_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_date_of_birthInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_expiry_dateInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_addressInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_professionInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_issuerInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1u0c18d_passport_pic_doc_idInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_1u0c18d">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_TaskType">
+        <bpmn2:targetRef>_Activity_1u0c18d_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1u0c18d_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">auto-verify-document</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1u0c18d_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_email">
+        <bpmn2:sourceRef>email</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_emailInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_first_name">
+        <bpmn2:sourceRef>first_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_first_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_last_name">
+        <bpmn2:sourceRef>last_name</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_last_nameInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_device_token">
+        <bpmn2:sourceRef>device_token</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_device_tokenInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_mobile_number">
+        <bpmn2:sourceRef>mobile_number</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_mobile_numberInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_person_id">
+        <bpmn2:sourceRef>person_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_person_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_kyc_type">
+        <bpmn2:sourceRef>kyc_type</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_kyc_typeInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_document_type">
+        <bpmn2:sourceRef>document_type</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_document_typeInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_document_id">
+        <bpmn2:sourceRef>document_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_document_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_reference_id">
+        <bpmn2:sourceRef>reference_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_reference_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_date_of_birth">
+        <bpmn2:sourceRef>date_of_birth</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_date_of_birthInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_expiry_date">
+        <bpmn2:sourceRef>expiry_date</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_expiry_dateInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_address">
+        <bpmn2:sourceRef>address</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_addressInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_profession">
+        <bpmn2:sourceRef>profession</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_professionInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_issuer">
+        <bpmn2:sourceRef>issuer</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_issuerInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1u0c18d_passport_pic_doc_id">
+        <bpmn2:sourceRef>passport_pic_doc_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1u0c18d_passport_pic_doc_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_15839ek" name="Notify Admins on manual document verification" drools:taskName="notify-admins">
+      <bpmn2:incoming>Flow_1jqgdyi</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_13aoos7</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_15839ek">
+        <bpmn2:dataInput id="_Activity_15839ek_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_15839ek_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_15839ek_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:inputSet id="inputSet_Activity_15839ek">
+          <bpmn2:dataInputRefs>_Activity_15839ek_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_15839ek_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_15839ek_subjectInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_15839ek">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_15839ek_TaskType">
+        <bpmn2:targetRef>_Activity_15839ek_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_15839ek_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">notify-admins</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_15839ek_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_15839ek_body">
+        <bpmn2:targetRef>_Activity_15839ek_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_15839ek_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Just notifying you that you have a new manual document verification request from " + first_name +" " + last_name +"."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_15839ek_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_15839ek_subject">
+        <bpmn2:targetRef>_Activity_15839ek_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_15839ek_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">Manual Document Verification (KYC)</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_15839ek_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_1ti0w73" name="Send user verification failure message" drools:taskName="send-user-message">
+      <bpmn2:incoming>Flow_1krk7gg</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_108u3xh</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_1ti0w73">
+        <bpmn2:dataInput id="_Activity_1ti0w73_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_1ti0w73_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:dataInput id="_Activity_1ti0w73_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_1ti0w73_messageInput" drools:dtype="String" name="message" />
+        <bpmn2:dataInput id="_Activity_1ti0w73_verification_reasonInput" drools:dtype="String" name="verification_reason" />
+        <bpmn2:inputSet id="inputSet_Activity_1ti0w73">
+          <bpmn2:dataInputRefs>_Activity_1ti0w73_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1ti0w73_subjectInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1ti0w73_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1ti0w73_messageInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_1ti0w73_verification_reasonInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_1ti0w73">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_1ti0w73_TaskType">
+        <bpmn2:targetRef>_Activity_1ti0w73_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1ti0w73_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">send-user-message</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1ti0w73_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1ti0w73_subject">
+        <bpmn2:targetRef>_Activity_1ti0w73_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1ti0w73_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Document verification failed for your " + kyc_type +" document"}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1ti0w73_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1ti0w73_body">
+        <bpmn2:targetRef>_Activity_1ti0w73_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1ti0w73_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"The verification failed for your " + kyc_type + 
+          " document due to the following reason: "+ verification_reason +
+          ". Please review the issue and resubmit a valid document."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1ti0w73_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1ti0w73_message">
+        <bpmn2:targetRef>_Activity_1ti0w73_messageInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_1ti0w73_message">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Document verification failed for your " + kyc_type + " document"}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1ti0w73_messageInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_1ti0w73_verification_reason">
+        <bpmn2:sourceRef>verification_reason</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_1ti0w73_verification_reasonInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_03cwn8x" name="Send user verification success message" drools:taskName="send-user-message">
+      <bpmn2:incoming>Flow_0tyjqog</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0l8znjn</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_03cwn8x">
+        <bpmn2:dataInput id="_Activity_03cwn8x_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_03cwn8x_subjectInput" drools:dtype="String" name="subject" />
+        <bpmn2:dataInput id="_Activity_03cwn8x_bodyInput" drools:dtype="String" name="body" />
+        <bpmn2:dataInput id="_Activity_03cwn8x_messageInput" drools:dtype="String" name="message" />
+        <bpmn2:inputSet id="inputSet_Activity_03cwn8x">
+          <bpmn2:dataInputRefs>_Activity_03cwn8x_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_03cwn8x_subjectInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_03cwn8x_bodyInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_03cwn8x_messageInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_03cwn8x">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_03cwn8x_TaskType">
+        <bpmn2:targetRef>_Activity_03cwn8x_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_03cwn8x_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">send-user-message</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_03cwn8x_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_03cwn8x_subject">
+        <bpmn2:targetRef>_Activity_03cwn8x_subjectInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_03cwn8x_subject">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Document verification successful for document type:" + kyc_type}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_03cwn8x_subjectInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_03cwn8x_body">
+        <bpmn2:targetRef>_Activity_03cwn8x_bodyInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_03cwn8x_body">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"The verification of your " + kyc_type + " document was successfully completed."}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_03cwn8x_bodyInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_03cwn8x_message">
+        <bpmn2:targetRef>_Activity_03cwn8x_messageInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_03cwn8x_message">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Verification successful for your " + kyc_type +" document"}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_03cwn8x_messageInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_0cvycck" name="Update person's kyc data" drools:taskName="update-kyc-data">
+      <bpmn2:incoming>Flow_15bf71q</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1ef1dm1</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0cvycck">
+        <bpmn2:dataInput id="_Activity_0cvycck_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataOutput id="_Activity_0cvycck_is_verifiedOutput" drools:dtype="Boolean" name="is_verified" />
+        <bpmn2:inputSet id="inputSet_Activity_0cvycck">
+          <bpmn2:dataInputRefs>_Activity_0cvycck_TaskTypeInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_0cvycck">
+          <bpmn2:dataOutputRefs>_Activity_0cvycck_is_verifiedOutput</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_0cvycck_TaskType">
+        <bpmn2:targetRef>_Activity_0cvycck_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0cvycck_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">update-kyc-data</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0cvycck_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="doa_Activity_0cvycck_is_verified">
+        <bpmn2:sourceRef>_Activity_0cvycck_is_verifiedOutput</bpmn2:sourceRef>
+        <bpmn2:targetRef>is_verified</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:task>
+    <bpmn2:task id="Activity_0g4eyfa" name="Update Document Details" drools:taskName="update-document-manual-review">
+      <bpmn2:incoming>Flow_020uei8</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_00o0ec9</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="ioSpec_Activity_0g4eyfa">
+        <bpmn2:dataInput id="_Activity_0g4eyfa_TaskTypeInput" drools:dtype="String" name="TaskType" />
+        <bpmn2:dataInput id="_Activity_0g4eyfa_document_idInput" drools:dtype="String" name="document_id" />
+        <bpmn2:dataInput id="_Activity_0g4eyfa_is_verifiedInput" drools:dtype="Boolean" name="is_verified" />
+        <bpmn2:dataInput id="_Activity_0g4eyfa_verification_reasonInput" drools:dtype="String" name="verification_reason" />
+        <bpmn2:inputSet id="inputSet_Activity_0g4eyfa">
+          <bpmn2:dataInputRefs>_Activity_0g4eyfa_TaskTypeInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0g4eyfa_document_idInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0g4eyfa_is_verifiedInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_Activity_0g4eyfa_verification_reasonInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="outputSet_Activity_0g4eyfa">
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="dia_Activity_0g4eyfa_TaskType">
+        <bpmn2:targetRef>_Activity_0g4eyfa_TaskTypeInput</bpmn2:targetRef>
+        <bpmn2:assignment id="assign_Activity_0g4eyfa_TaskType">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">update-document-manual-review</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0g4eyfa_TaskTypeInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0g4eyfa_document_id">
+        <bpmn2:sourceRef>document_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0g4eyfa_document_idInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0g4eyfa_is_verified">
+        <bpmn2:sourceRef>is_verified</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0g4eyfa_is_verifiedInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="dia_Activity_0g4eyfa_verification_reason">
+        <bpmn2:sourceRef>verification_reason</bpmn2:sourceRef>
+        <bpmn2:targetRef>_Activity_0g4eyfa_verification_reasonInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:exclusiveGateway id="Gateway_1uftlwz" name="Is document verified?" gatewayDirection="Diverging">
+      <bpmn2:incoming>Flow_15qo029</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1krk7gg</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_0tyjqog</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:parallelGateway id="Gateway_0ibmope" gatewayDirection="Diverging">
+      <bpmn2:incoming>Flow_0trstrm</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1jqgdyi</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_1jmnz0p</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:parallelGateway id="Gateway_142bm0u" gatewayDirection="Converging">
+      <bpmn2:incoming>Flow_13aoos7</bpmn2:incoming>
+      <bpmn2:incoming>Flow_1kksejy</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0xe78ch</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:parallelGateway id="Gateway_1dpboyv" gatewayDirection="Diverging">
+      <bpmn2:incoming>Flow_19ktbpg</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_15bf71q</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_020uei8</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:parallelGateway id="Gateway_175siup" gatewayDirection="Converging">
+      <bpmn2:incoming>Flow_1ef1dm1</bpmn2:incoming>
+      <bpmn2:incoming>Flow_00o0ec9</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_15qo029</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
+    <bpmn2:endEvent id="Event_0x0ddj5">
+      <bpmn2:incoming>Flow_0l8znjn</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:endEvent id="Event_0x0ddj5_fail">
+      <bpmn2:incoming>Flow_108u3xh</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_0l8znjn" sourceRef="Activity_03cwn8x" targetRef="Event_0x0ddj5" />
+    <bpmn2:sequenceFlow id="Flow_0trstrm" sourceRef="Activity_1a3xz8p" targetRef="Gateway_0ibmope" />
+    <bpmn2:sequenceFlow id="Flow_0tyjqog" sourceRef="Gateway_1uftlwz" targetRef="Activity_03cwn8x">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">return is_verified == true;</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="Flow_0xe78ch" sourceRef="Gateway_142bm0u" targetRef="Activity_1csov5t" />
+    <bpmn2:sequenceFlow id="Flow_108u3xh" sourceRef="Activity_1ti0w73" targetRef="Event_0x0ddj5_fail" />
+    <bpmn2:sequenceFlow id="Flow_13aoos7" sourceRef="Activity_15839ek" targetRef="Gateway_142bm0u" />
+    <bpmn2:sequenceFlow id="Flow_13bpygg" sourceRef="StartEvent_1" targetRef="Activity_1a3xz8p" />
+    <bpmn2:sequenceFlow id="Flow_1jmnz0p" sourceRef="Gateway_0ibmope" targetRef="Activity_1u0c18d" />
+    <bpmn2:sequenceFlow id="Flow_1jqgdyi" sourceRef="Gateway_0ibmope" targetRef="Activity_15839ek" />
+    <bpmn2:sequenceFlow id="Flow_1kksejy" sourceRef="Activity_1u0c18d" targetRef="Gateway_142bm0u" />
+    <bpmn2:sequenceFlow id="Flow_1krk7gg" sourceRef="Gateway_1uftlwz" targetRef="Activity_1ti0w73">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">return is_verified == false;</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="Flow_19ktbpg" sourceRef="Activity_1csov5t" targetRef="Gateway_1dpboyv" />
+    <bpmn2:sequenceFlow id="Flow_15bf71q" sourceRef="Gateway_1dpboyv" targetRef="Activity_0cvycck" />
+    <bpmn2:sequenceFlow id="Flow_020uei8" sourceRef="Gateway_1dpboyv" targetRef="Activity_0g4eyfa" />
+    <bpmn2:sequenceFlow id="Flow_1ef1dm1" sourceRef="Activity_0cvycck" targetRef="Gateway_175siup" />
+    <bpmn2:sequenceFlow id="Flow_00o0ec9" sourceRef="Activity_0g4eyfa" targetRef="Gateway_175siup" />
+    <bpmn2:sequenceFlow id="Flow_15qo029" sourceRef="Gateway_175siup" targetRef="Gateway_1uftlwz" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="kyc-verification">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="252" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1a3xz8p_di" bpmnElement="Activity_1a3xz8p">
+        <dc:Bounds x="210" y="230" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1u0c18d_di" bpmnElement="Activity_1u0c18d">
+        <dc:Bounds x="430" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0ibmope_di" bpmnElement="Gateway_0ibmope">
+        <dc:Bounds x="325" y="245" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_08qqpc6" bpmnElement="Activity_15839ek">
+        <dc:Bounds x="410" y="330" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_142bm0u_di" bpmnElement="Gateway_142bm0u">
+        <dc:Bounds x="545" y="245" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1csov5t_di" bpmnElement="Activity_1csov5t">
+        <dc:Bounds x="620" y="240" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0x0ddj5_di" bpmnElement="Event_0x0ddj5">
+        <dc:Bounds x="1342" y="392" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0x0ddj5_fail_di" bpmnElement="Event_0x0ddj5_fail">
+        <dc:Bounds x="1342" y="132" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_01mlggc" bpmnElement="Activity_03cwn8x">
+        <dc:Bounds x="1170" y="370" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_09morgk" bpmnElement="Activity_1ti0w73">
+        <dc:Bounds x="1160" y="110" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1uftlwz_di" bpmnElement="Gateway_1uftlwz" isMarkerVisible="true">
+        <dc:Bounds x="1035" y="235" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1094.5" y="246.5" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_175siup_di" bpmnElement="Gateway_175siup">
+        <dc:Bounds x="945" y="235" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_13km2zn" bpmnElement="Activity_0cvycck">
+        <dc:Bounds x="810" y="130" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1dpboyv_di" bpmnElement="Gateway_1dpboyv">
+        <dc:Bounds x="755" y="245" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0g4eyfa_di" bpmnElement="Activity_0g4eyfa">
+        <dc:Bounds x="840" y="330" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_13bpygg_di" bpmnElement="Flow_13bpygg">
+        <di:waypoint x="188" y="270" />
+        <di:waypoint x="210" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0trstrm_di" bpmnElement="Flow_0trstrm">
+        <di:waypoint x="310" y="270" />
+        <di:waypoint x="325" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jmnz0p_di" bpmnElement="Flow_1jmnz0p">
+        <di:waypoint x="350" y="245" />
+        <di:waypoint x="350" y="160" />
+        <di:waypoint x="430" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kksejy_di" bpmnElement="Flow_1kksejy">
+        <di:waypoint x="530" y="160" />
+        <di:waypoint x="570" y="160" />
+        <di:waypoint x="570" y="245" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jqgdyi_di" bpmnElement="Flow_1jqgdyi">
+        <di:waypoint x="350" y="295" />
+        <di:waypoint x="350" y="370" />
+        <di:waypoint x="410" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13aoos7_di" bpmnElement="Flow_13aoos7">
+        <di:waypoint x="510" y="370" />
+        <di:waypoint x="570" y="370" />
+        <di:waypoint x="570" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xe78ch_di" bpmnElement="Flow_0xe78ch">
+        <di:waypoint x="595" y="270" />
+        <di:waypoint x="608" y="270" />
+        <di:waypoint x="608" y="280" />
+        <di:waypoint x="620" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19ktbpg_di" bpmnElement="Flow_19ktbpg">
+        <di:waypoint x="720" y="280" />
+        <di:waypoint x="738" y="280" />
+        <di:waypoint x="738" y="270" />
+        <di:waypoint x="755" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0l8znjn_di" bpmnElement="Flow_0l8znjn">
+        <di:waypoint x="1270" y="410" />
+        <di:waypoint x="1342" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_108u3xh_di" bpmnElement="Flow_108u3xh">
+        <di:waypoint x="1260" y="150" />
+        <di:waypoint x="1342" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tyjqog_di" bpmnElement="Flow_0tyjqog">
+        <di:waypoint x="1060" y="285" />
+        <di:waypoint x="1060" y="410" />
+        <di:waypoint x="1170" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1krk7gg_di" bpmnElement="Flow_1krk7gg">
+        <di:waypoint x="1060" y="235" />
+        <di:waypoint x="1060" y="150" />
+        <di:waypoint x="1160" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15qo029_di" bpmnElement="Flow_15qo029">
+        <di:waypoint x="995" y="260" />
+        <di:waypoint x="1035" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ef1dm1_di" bpmnElement="Flow_1ef1dm1">
+        <di:waypoint x="910" y="170" />
+        <di:waypoint x="970" y="170" />
+        <di:waypoint x="970" y="235" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00o0ec9_di" bpmnElement="Flow_00o0ec9">
+        <di:waypoint x="890" y="330" />
+        <di:waypoint x="890" y="260" />
+        <di:waypoint x="945" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15bf71q_di" bpmnElement="Flow_15bf71q">
+        <di:waypoint x="780" y="245" />
+        <di:waypoint x="780" y="190" />
+        <di:waypoint x="810" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_020uei8_di" bpmnElement="Flow_020uei8">
+        <di:waypoint x="780" y="295" />
+        <di:waypoint x="780" y="370" />
+        <di:waypoint x="840" y="370" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
