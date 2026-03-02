@@ -110,7 +110,7 @@
       <bpmn2:dataInputAssociation id="dia_Activity_0tn91pb_body">
         <bpmn2:targetRef>_Activity_0tn91pb_bodyInput</bpmn2:targetRef>
         <bpmn2:assignment id="assign_Activity_0tn91pb_body">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Your PropertyPlatformJMÃ‚Â® confirmation code is: " + confirmation_code + ". Please use this code to verify your email address. The code will expire in a few minutes."}</bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">#{"Your PropertyPlatformJM® confirmation code is: " + confirmation_code + ". Please use this code to verify your email address. The code will expire in a few minutes."}</bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_0tn91pb_bodyInput</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>

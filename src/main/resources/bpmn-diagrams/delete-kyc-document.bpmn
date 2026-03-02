@@ -104,7 +104,7 @@
     </bpmn2:userTask>
 
     <bpmn2:task id="Activity_1pcujrf" name="Update Kyc"
-               drools:taskName="delete-kyc-data">
+               drools:taskName="update-kyc-data">
       <bpmn2:incoming>Flow_0luoemx</bpmn2:incoming>
       <bpmn2:outgoing>Flow_1vsk09w</bpmn2:outgoing>
       <bpmn2:ioSpecification id="ioSpec_Activity_1pcujrf">
@@ -124,7 +124,7 @@
       <bpmn2:dataInputAssociation id="dia_Activity_1pcujrf_TaskType">
         <bpmn2:targetRef>_Activity_1pcujrf_TaskTypeInput</bpmn2:targetRef>
         <bpmn2:assignment id="assign_Activity_1pcujrf_TaskType">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression">delete-kyc-data</bpmn2:from>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">update-kyc-data</bpmn2:from>
           <bpmn2:to xsi:type="bpmn2:tFormalExpression">_Activity_1pcujrf_TaskTypeInput</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>

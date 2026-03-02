@@ -8,6 +8,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -135,9 +136,30 @@ public class KieServerService {
     @SuppressWarnings("unchecked")
     public ProcessInstanceDto getProcessInstance(String processInstanceId) {
         try {
+            // Try standard endpoint first (active instances)
+            try {
+                Map<String, Object> response = kieServerWebClient.get()
+                        .uri("/containers/{containerId}/processes/instances/{instanceId}",
+                                kieServerConfig.getContainerId(), processInstanceId)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .retrieve()
+                        .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
+                        .block();
+
+                if (response != null) {
+                    return ProcessInstanceDto.builder()
+                            .processInstanceKey(String.valueOf(response.get("process-instance-id")))
+                            .bpmnProcessId((String) response.get("process-id"))
+                            .state(mapJbpmState(getInt(response, "process-instance-state")))
+                            .build();
+                }
+            } catch (WebClientResponseException.NotFound e) {
+                log.info("Process instance {} not found via standard endpoint, trying queries endpoint", processInstanceId);
+            }
+
+            // Fallback to queries endpoint (works for completed/aborted instances)
             Map<String, Object> response = kieServerWebClient.get()
-                    .uri("/containers/{containerId}/processes/instances/{instanceId}",
-                            kieServerConfig.getContainerId(), processInstanceId)
+                    .uri("/queries/processes/instances/{instanceId}", processInstanceId)
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
@@ -161,19 +183,73 @@ public class KieServerService {
     public Map<String, Object> getProcessInstanceVariables(String processInstanceId) {
         try {
             log.info("Fetching variables for process instance: {}", processInstanceId);
-            Map<String, Object> variables = kieServerWebClient.get()
-                    .uri("/containers/{containerId}/processes/instances/{instanceId}/variables",
-                            kieServerConfig.getContainerId(), processInstanceId)
+
+            // Try the standard endpoint first (works for active instances)
+            try {
+                Map<String, Object> variables = kieServerWebClient.get()
+                        .uri("/containers/{containerId}/processes/instances/{instanceId}/variables",
+                                kieServerConfig.getContainerId(), processInstanceId)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .retrieve()
+                        .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
+                        .block();
+
+                if (variables != null && !variables.isEmpty()) {
+                    return variables;
+                }
+            } catch (WebClientResponseException.NotFound e) {
+                log.info("Process instance {} not found via standard endpoint, trying history/queries endpoint", processInstanceId);
+            }
+
+            // Fallback to queries endpoint (works for completed/aborted instances)
+            return getProcessInstanceVariablesFromHistory(processInstanceId);
+
+        } catch (Exception e) {
+            log.error("Error fetching variables for instance {}: {}", processInstanceId, e.getMessage(), e);
+            throw new RuntimeException("Failed to fetch process instance variables", e);
+        }
+    }
+
+    /**
+     * Fetch process variables from the history/queries endpoint.
+     * This works for completed, aborted, and active process instances.
+     */
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> getProcessInstanceVariablesFromHistory(String processInstanceId) {
+        try {
+            log.info("Fetching variables from history for process instance: {}", processInstanceId);
+            Map<String, Object> response = kieServerWebClient.get()
+                    .uri("/queries/processes/instances/{instanceId}/variables/instances", processInstanceId)
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
                     .block();
 
-            return variables != null ? variables : Collections.emptyMap();
+            if (response == null) return Collections.emptyMap();
 
+            Object varInstances = response.get("variable-instance");
+            if (!(varInstances instanceof List<?>)) return Collections.emptyMap();
+
+            // Convert the variable-instance array into a flat name→value map
+            // Each entry has: {"name": "...", "value": "...", "old-value": "...", ...}
+            Map<String, Object> variables = new LinkedHashMap<>();
+            for (Map<String, Object> varEntry : (List<Map<String, Object>>) varInstances) {
+                String name = (String) varEntry.get("name");
+                Object value = varEntry.get("value");
+                if (name != null) {
+                    variables.put(name, value);
+                }
+            }
+
+            log.info("Retrieved {} variables from history for instance {}", variables.size(), processInstanceId);
+            return variables;
+
+        } catch (WebClientResponseException.NotFound e) {
+            log.warn("Process instance {} not found in history either", processInstanceId);
+            return Collections.emptyMap();
         } catch (Exception e) {
-            log.error("Error fetching variables: {}", e.getMessage(), e);
-            throw new RuntimeException("Failed to fetch process instance variables", e);
+            log.warn("Error fetching variables from history for instance {}: {}", processInstanceId, e.getMessage());
+            return Collections.emptyMap();
         }
     }
 

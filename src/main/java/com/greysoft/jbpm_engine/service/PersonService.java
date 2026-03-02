@@ -1,5 +1,6 @@
 package com.greysoft.jbpm_engine.service;
 
+import com.greysoft.jbpm_engine.dto.APIResponse;
 import com.greysoft.jbpm_engine.dto.KycDto;
 import com.greysoft.jbpm_engine.dto.people.AddressDto;
 import com.greysoft.jbpm_engine.dto.people.PersonDto;
@@ -93,14 +94,19 @@ public class PersonService {
     public Optional<KycDto> getKycByPersonIdAsDto(UUID personId) {
         try {
             logger.info("Fetching KYC DTO for person: {}", personId);
-            KycDto kyc = webClient.get()
-                    .uri("/persons/{id}/kyc", personId)
+            APIResponse<KycDto> response = webClient.get()
+                    .uri("/kyc/person/{personId}", personId)
                     .header(HttpHeaders.AUTHORIZATION, getAuthorizationHeader())
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
-                    .bodyToMono(KycDto.class)
+                    .bodyToMono(new ParameterizedTypeReference<APIResponse<KycDto>>() {})
                     .block();
-            return Optional.ofNullable(kyc);
+            if (response != null && response.isSuccess() && response.getData() != null) {
+                logger.info("Fetched KYC DTO for person {}: id={}", personId, response.getData().getId());
+                return Optional.of(response.getData());
+            }
+            logger.warn("KYC DTO response was null or unsuccessful for person: {}", personId);
+            return Optional.empty();
         } catch (Exception e) {
             logger.error("Error fetching KYC DTO for person {}: {}", personId, e.getMessage(), e);
             return Optional.empty();
@@ -110,16 +116,20 @@ public class PersonService {
     public Mono<KycDto> updateKyc(UUID kycId, KycDto kycDto) {
         try {
             logger.info("Updating KYC: {}", kycId);
-            return Mono.justOrEmpty(
-                webClient.put()
-                    .uri("/persons/kyc/{id}", kycId)
+            APIResponse<KycDto> response = webClient.put()
+                    .uri("/kyc/{id}", kycId)
                     .header(HttpHeaders.AUTHORIZATION, getAuthorizationHeader())
                     .contentType(MediaType.APPLICATION_JSON)
                     .bodyValue(kycDto)
                     .retrieve()
-                    .bodyToMono(KycDto.class)
-                    .block()
-            );
+                    .bodyToMono(new ParameterizedTypeReference<APIResponse<KycDto>>() {})
+                    .block();
+            if (response != null && response.isSuccess() && response.getData() != null) {
+                logger.info("Updated KYC: {}", kycId);
+                return Mono.just(response.getData());
+            }
+            logger.warn("KYC update response was null or unsuccessful for KYC: {}", kycId);
+            return Mono.empty();
         } catch (Exception e) {
             logger.error("Error updating KYC {}: {}", kycId, e.getMessage(), e);
             return Mono.error(e);

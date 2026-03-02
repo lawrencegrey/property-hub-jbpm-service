@@ -86,7 +86,11 @@ public class ProcessControllerV1 {
         try {
             Map<String, Object> variables = kieServerService.getProcessInstanceVariables(id);
             return ResponseEntity.ok(variables);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
+            if (e.getCause() instanceof org.springframework.web.reactive.function.client.WebClientResponseException.NotFound) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Map.of("error", "Process instance " + id + " not found"));
+            }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", e.getMessage()));
         }
