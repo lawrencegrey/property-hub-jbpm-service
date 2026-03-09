@@ -34,6 +34,7 @@ import java.util.UUID;
  *   <li>verify-address</li>
  *   <li>activate-person</li>
  *   <li>delete-all-person-data</li>
+ *   <li>update-person-reported</li>
  * </ul>
  */
 public class PersonWorkItemHandler implements WorkItemHandler {
@@ -90,6 +91,9 @@ public class PersonWorkItemHandler implements WorkItemHandler {
                     break;
                 case "delete-all-person-data":
                     handleDeleteAllPersonData(workItem, results);
+                    break;
+                case "update-person-reported":
+                    handleUpdatePersonReported(workItem, results);
                     break;
                 default:
                     log.warn("[PersonWorkItemHandler] Unknown taskType: {}", taskType);
@@ -363,6 +367,26 @@ public class PersonWorkItemHandler implements WorkItemHandler {
         results.put("success", true);
         results.put("personId", personId.toString());
         results.put("message", "All person data deleted");
+    }
+
+    private void handleUpdatePersonReported(WorkItem workItem, Map<String, Object> results) {
+        String personIdStr = (String) workItem.getParameter("person_id");
+        if (personIdStr == null) {
+            results.put("success", false);
+            results.put("error", "Missing person_id");
+            return;
+        }
+
+        UUID personId = UUID.fromString(personIdStr.trim());
+        boolean updated = personService.updateReported(personId, true);
+
+        results.put("success", updated);
+        results.put("person_id", personId.toString());
+        if (updated) {
+            results.put("message", "Person reported status updated to true");
+        } else {
+            results.put("error", "Person not found");
+        }
     }
 
     // ========== KYC Helper Methods ==========

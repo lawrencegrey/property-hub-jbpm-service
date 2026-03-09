@@ -107,6 +107,12 @@
             <parameters/>
             <name>delete-all-person-data</name>
         </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new com.greysoft.jbpm_engine.handler.RestCallbackWorkItemHandler("http://property-workflow-wrapper:8006/api/internal/workitem/execute")</identifier>
+            <parameters/>
+            <name>update-person-reported</name>
+        </work-item-handler>
 
         <!-- Property tasks -->
         <work-item-handler>

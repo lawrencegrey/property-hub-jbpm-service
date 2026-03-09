@@ -269,6 +269,27 @@ public class PersonService {
         }
     }
 
+    public boolean updateReported(UUID id, boolean reported) {
+        try {
+            logger.info("Updating reported status for person {} to {}", id, reported);
+            APIResponse<Void> response = webClient.patch()
+                    .uri("/persons/{id}/reported?reported={reported}", id, reported)
+                    .header(HttpHeaders.AUTHORIZATION, getAuthorizationHeader())
+                    .retrieve()
+                    .bodyToMono(new ParameterizedTypeReference<APIResponse<Void>>() {})
+                    .block();
+            if (response != null && response.isSuccess()) {
+                logger.info("Successfully updated reported status for person {}", id);
+                return true;
+            }
+            logger.warn("Person not found for reported update, id={}", id);
+            return false;
+        } catch (Exception e) {
+            logger.error("Error updating reported status for person {}: {}", id, e.getMessage(), e);
+            return false;
+        }
+    }
+
     public void deleteAllPersonData(UUID personId) {
         try {
             logger.info("Deleting all data for person: {}", personId);

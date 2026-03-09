@@ -114,6 +114,7 @@ public class WorkItemHandlerConfig {
         registry.put("verify-address", personHandler);
         registry.put("activate-person", personHandler);
         registry.put("delete-all-person-data", personHandler);
+        registry.put("update-person-reported", personHandler);
 
         // ---- Property tasks ----
         registry.put("update-property-data", propertyHandler);
